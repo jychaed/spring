@@ -277,6 +277,8 @@ public class boardController {
 //		 return "success";
 //	  }
 //
+	
+	/// 수정해보기 
 
 }
 
