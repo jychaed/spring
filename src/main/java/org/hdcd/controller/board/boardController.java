@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/board")
-public class boardController {
+public class BoardController {
 
-	private static final Logger Logger = LoggerFactory.getLogger(boardController.class);
+	private static final Logger Logger = LoggerFactory.getLogger(BoardController.class);
 	/*
 	 * 1. 요청 경로 매핑
 	 * @RequestMapping(value = "/board/register")

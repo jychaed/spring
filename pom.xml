@@ -120,10 +120,17 @@
 		</dependency>
 		
 		<!-- xml 데이터 바인딩을 위한 의존 라이브러리 -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.fasterxml.jackson.dataformat</groupId> -->
+<!-- 			<artifactId>jackson-dataformat-xml</artifactId> -->
+<!-- 			<version>2.9.5</version> -->
+<!-- 		</dependency> -->
+
+		<!-- 파일을 처리하기 위한 라이브러리 의존 관계 정의 -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>2.9.5</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
 		</dependency>
 		
 		
