@@ -276,6 +276,7 @@ public class HomeController {
 	/* 10) ResponseEntity<Map> 타입 end */
 	
 	/* 11) ResponseEntity<byte[]> 타입  =================================================================== */
+	// 이미지 출력
 	// response할 때, HTTP 헤더 정보와 객체 데이터를 Map 형태로 전달하는 용도로 사용한다. 
 	@RequestMapping(value = "/goHome1101", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> goHome1101(){
@@ -299,6 +300,7 @@ public class HomeController {
 		
 	}
 	
+	// 압축파일 다운로드 (각각 버전 다르게 해야함)
 	@RequestMapping(value = "/goHome1102", method = RequestMethod.GET)	
 	public ResponseEntity<byte[]> goHome1102() throws Exception{
 		logger.info("goHome1102");
