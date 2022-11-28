@@ -10,6 +10,8 @@ import org.hdcd.vo.Address;
 import org.hdcd.vo.AllMember;
 import org.hdcd.vo.Card;
 import org.hdcd.vo.Member;
+import org.hdcd.vo.MultiFileMember;
+import org.hdcd.vo.fileMember;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -610,6 +612,125 @@ public class MemberController {
 		logger.info("ContentType" + picture.getContentType());
 		return "success"; 
 	}
+	
+	//20221128
+	// 2) 
+	// 파일 업로드 폼 파일 요소값과 텍스트 필드 요소값을 MultipartFile 매개 변수와 문자열 매개변수로 처리한다
+	@RequestMapping(value = "/registerFile02", method = RequestMethod.POST) 
+	public String registerFile02(String userId, String password, MultipartFile picture){	
+		logger.info("registerFile02");
+		logger.info("userId" + userId);
+		logger.info("password" + password);
+		
+		logger.info("OriginalFilename" + picture.getOriginalFilename());
+		logger.info("Size" + picture.getSize());
+		logger.info("ContentType" + picture.getContentType());
+		
+		return "success"; 
+	}
+	
+	// 3) 
+	// 파일 업로드 폼 파일 요소값과 텍스트 필드 요소값을 MultipartFile 매개 변수와 자바빈즈 매개변수로 처리한다
+	@RequestMapping(value = "/registerFile03", method = RequestMethod.POST) 
+	public String registerFile03(Member member, MultipartFile picture){	
+		logger.info("registerFile03");
+		logger.info("member.getUserId() : " + member.getUserId());
+		logger.info("member.getPassword() : " + member.getPassword());
+		
+		logger.info("OriginalFilename" + picture.getOriginalFilename());
+		logger.info("Size" + picture.getSize());
+		logger.info("ContentType" + picture.getContentType());
+		
+		return "success"; 
+	}
+	
+	// 4) 
+	// 파일 업로드 폼 파일 요소값과 텍스트 필드 요소값을 FileMember 타입의 자바빈즈 매개변수로 처리한다
+	@RequestMapping(value = "/registerFile04", method = RequestMethod.POST) 
+	public String registerFile04(fileMember fileMember){	
+		logger.info("registerFile04");
+		logger.info("member.getUserId() : " + fileMember.getUserId());
+		logger.info("member.getPassword() : " + fileMember.getPassword());
+		
+		MultipartFile picture = fileMember.getPicture();
+		
+		logger.info("OriginalFilename" + picture.getOriginalFilename());
+		logger.info("Size" + picture.getSize());
+		logger.info("ContentType" + picture.getContentType());
+		
+		return "success"; 
+	}
+	
+	// 5) 
+	// 여러 개의 파일 업로드를 폼 파일 요소 값을 여러개의 MultipartFile 매개변수로 처리한다
+	@RequestMapping(value = "/registerFile05", method = RequestMethod.POST) 
+	public String registerFile05(MultipartFile picture, MultipartFile picture2 ){	
+		logger.info("registerFile05");
+		logger.info("OriginalFilename" + picture.getOriginalFilename());
+		logger.info("Size" + picture.getSize());
+		logger.info("ContentType" + picture.getContentType());
+		
+		logger.info("OriginalFilename" + picture2.getOriginalFilename());
+		logger.info("Size" + picture2.getSize());
+		logger.info("ContentType" + picture2.getContentType());
+		
+		return "success"; 
+	}
+	
+	// 6) 
+	// 여러 개의 파일 업로드를 폼 파일 요소 값을 MultipartFile 타입의 요소를 가진 리스트 컬렉션 타입 매개변수로 처리한다
+	@RequestMapping(value = "/registerFile06", method = RequestMethod.POST) 
+	public String registerFile06(List<MultipartFile> pictureList ){	
+		// 컬렉션 리스트로는 이미지 파일을 가져올 수 없다.
+		logger.info("registerFile06");
+		logger.info("pictureList.size() " + pictureList.size());
+	
+		for(int i = 0; i < pictureList.size(); i++) {
+			logger.info("OriginalFilename" + pictureList.get(i).getOriginalFilename());
+			logger.info("Size" + pictureList.get(i).getSize());
+			logger.info("ContentType" + pictureList.get(i).getContentType());
+		}
+		
+		return "success"; 
+	}
+	
+	// 7) , 7-2) 
+	// 여러 개의 파일 업로드 폼 파일 요소 값과 텍스트 필드 요소값을 MultipartFileMember 타입의 자바빈즈 매개변수로 처리한다
+	// 객체 내에 존재하는 key(변수명)로 파일을 받을 수 있다.
+	// 7)은 input file 2개로 객체에 mapping
+	// 7-2)는 multiple 요소 이용하여 개게에 mapping
+	@RequestMapping(value = "/registerFile07", method = RequestMethod.POST) 
+	public String registerFile07(MultiFileMember multifileMember){	
+		logger.info("registerFile07");
+		
+		List<MultipartFile> pictureList =  multifileMember.getPictureList();
+		logger.info("registerFile07 pictureList.size() : " + pictureList.size());
+		
+		for(MultipartFile picture : pictureList) {
+			logger.info("OriginalFilename" + picture.getOriginalFilename());
+			logger.info("Size" + picture.getSize());
+			logger.info("ContentType" + picture.getContentType());
+		}
+		
+		return "success"; 
+	}
+	
+	// 8) 
+	// 파일 업로드 폼 파일 요소 값과 텍스트 필드 요소값을 MultipartFile 타입의 배열 매개변수로 처리한다
+	@RequestMapping(value = "/registerFile08", method = RequestMethod.POST) 
+	public String registerFile08(MultipartFile[] pictureList){	
+		logger.info("registerFile08");
+		logger.info("registerFile08 pictureList.length : " + pictureList.length);
+		
+		for(MultipartFile picture : pictureList) {
+			logger.info("OriginalFilename" + picture.getOriginalFilename());
+			logger.info("Size" + picture.getSize());
+			logger.info("ContentType" + picture.getContentType());
+		}
+		
+		return "success"; 
+	}
+	
 	
 	
 }

@@ -1,14 +1,14 @@
-┏────────────────────────────┐
-│	1장. 스프링 개발 환경    │
-└────────────────────────────┛
+┌──────────────────────
+│	1장. 스프링 개발 환경
+└──────────────────────
 
-	JDK 1.8, Tomcat 8.5.x , Oracle 11g xe
+	JDK 1.8, Tomcat 8.5.x, Oracle 11g xe
 	이클립스 4.16, STS 3.9.15
 	
-┏────────────────────────────┐
-│	2장. 프로젝트 생성       │
-└────────────────────────────┛
-	
+┌──────────────────────
+│	2장. 프로젝트 생성
+└──────────────────────
+
 	스프링 MVC 구조
 	
 		1. 스프링 MVC 구조
@@ -16,72 +16,72 @@
 			
 			스프링 MVC 요청 처리 흐름도
 			[단계별 설명]
-			1) 클라이언트 (브라우저)의 요청을 DispatcherServlet이 받는다.
-			2) 받은 요청을 처리할 수 있는 Handler의 이름을 HandlerMapping에게 물어본다.
+			1) 클라이언트(브라우저)의 요청을 DispatcherServlet이 받는다.
+			2) 받은 요청을 처리할 수 있는 Handler의 이름을 HandlerMapping에게 물어 본다.
 			3) HandlerMapping은 요청 URL을 비롯한 여러 요청 정보를 가지고 handler를 판단한다.
-			4) DispatcherServlet은 HandlerMapping으로 부터 선택받은 Handler에게 요청을 보낸다.
-			5) Handler는 요청을 적절히 처리하고 응답에서 랜더링해야하는 View Name을 판단해서 DispatcherServlet에게 전송한다.
-			6) DispatcherServlet은 논리적인 View Name을 View Resolver 에 전달한다.
+			4) DispatcherServlet은 HadlerMapping으로 부터 선택받은 Handler에게 요청을 보낸다.
+			5) Handler는 요청을 적절히 처리하고 응답에서 랜더링해야 하는 View Name을 판단해서 DispatcherServlet에게 전송한다.
+			6) DispatcherServlet은 논리적인 View Name을 View Resolver에 전달한다.
 			7) View Resolver는 응답에 필요한 View를 생성하여 DispatcherServlet에 보낸다.
 			8) DispatcherServlet은 해당하는 View에 Model을 전달한다.
 			9) View는 Model을 참조해서 응답을 생성한다.
-			10) DispatcherServlet은 생성된 응답을 클라이언트 (브라우저)에 반환한다
-		
+			10) DispatcherServlet은 생성된 응답을 클라이언트(브라우저)에 반환한다.
+			
 		2. 스프링 MVC 프로젝트 생성
-			Spring Legacy Project(Spring MVC Project) 생성
+			Spring Legacy Proejct(Spring MVC Project) 생성
 			
 		3. MVC 프로젝트 파일 구성
 			프로젝트를 새로 생성하면 관련 파일들과 폴더들이 자동으로 생성된다.
 			
 			구성요소
-			- pom.xml												: 메이븐 프로젝트 빌드 파일
-			- src/main/java											: 자바 소스 경로
-			- src/main/resources									: 리소스 파일경로
-			- src/.../WEB-INF/web.xml								: 웹컨데이너 설정 파일
-			- src/.../WEB-INF/spring/root-context.xml				: 스프링 설정 파일
-			- src/.../WEB-INF/spring/appServlet/servlet-context.xml	: 스프링 웹 설정 파일
-			- src/.../WEB-INF/views									: 뷰 파일 경로
+			- pom.xml														: 메이븐 프로젝트 빌드 파일
+			- src/main/java													: 자바 소스 경로
+			- src/main/resources											: 리소스 파일 경로
+			- src/.../WEB-INF/web.xml										: 웹 컨테이너 설정 파일
+			- src/.../WEB-INF/spring/root-context.xml						: 스프링 설정 파일
+			- src/.../WEB-INF/spring/appServlet/servlet-context.xml			: 스프링 웹 설정 파일
+			- src/.../WEB-INF/views											: 뷰 파일 경로
 			
 		4. 로그 레벨 설정
 		
-		Log4j 구성요소
+		Log4j 구성 요소
 		
-			요소			│					설명
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────
-			Logger			│		 출력할 메세지를 Appender에 전달합니다
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────
-			Appender		│		 전달된 로그를 어디에 출력할지 결정합니다.( 콘솔 출력, 파일 기록, DB저장 등)
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────
-			Layout			│		 로그를 어떤 형식으로 출력할 지 결정합니다.
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────
-
+			요소				|						설명
+		──────────────────────────────────────────────────────────────────────────────────
+			Logger			|	출력할 메시지를 Appender에 전달합니다.
+		──────────────────────────────────────────────────────────────────────────────────
+			Appender		|	전달된 로그를 어디에 출력할 지 결정합니다. (콘솔 출력, 파일 기록, DB 저장 등)
+		──────────────────────────────────────────────────────────────────────────────────
+			Layout			|	로그를 어떤 형식으로 출력할지 결정합니다.
+		──────────────────────────────────────────────────────────────────────────────────
+		
 		Log4j 레벨
 		
-			로그레벨		│						설명
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-			FATAL			│	 	아주 심각한 에러가 발생한 상태
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-			ERROR			│	 	어떠한 요청을 처리하는 중 문제가 발생한 상태
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-			WARN			│		프로그램의 실행에는 문제가 없지만 향후 시스템 에러의 원인이 될 수 있는 경고성 메세지 출력
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-			INFO			│		어떠한 상태변경과 같은 정보성 메세지 출력
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-			DEBUG			│		개발시 디버그 용도로 사용하는 메세지 출력
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-			TRACE			│		디버그 레벨이 너무 광범위한것을 해결하기 위해서 좀더 상세한 이벤트를 나타냄
-		───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+			로그레벨			|						설명
+		───────────────────────────────────────────────────────────────────────────────────────────────────
+			FATAL			|	아주 심각한 에러가 발생한 상태를 나타냅니다.
+		───────────────────────────────────────────────────────────────────────────────────────────────────
+			ERROR			|	어떠한 요청을 처리하는 중 문제가 발생한 상태를 나타냅니다.
+		───────────────────────────────────────────────────────────────────────────────────────────────────
+			WARN			|	프로그램의 실행에는 문제가 없지만, 향후 시스템 에러의 원인이 될 수 있는 경고성 메세지를 나타냅니다.
+		───────────────────────────────────────────────────────────────────────────────────────────────────
+			INFO			|	어떠한 상태변경과 같은 정보성 메시지를 나타냅니다.
+		───────────────────────────────────────────────────────────────────────────────────────────────────
+			DEBUG			|	개발시 디버그 용도로 사용하는 메시지를 나타냅니다.
+		───────────────────────────────────────────────────────────────────────────────────────────────────
+			TRACE			|	디버그 레벨이 너무 광범위한것을 해결하기 위해서 좀 더 상세한 이벤트를 나타냅니다.
+		───────────────────────────────────────────────────────────────────────────────────────────────────			
 			
-┏────────────────────────────┐
-│	3장. 컨트롤러 요청 매핑  │
-└────────────────────────────┛
-	
+┌──────────────────────
+│	3장. 컨트롤러 요청 매핑
+└──────────────────────
+			
 	1. 요청 경로 매핑
-		@RquestMapping의 value속성에 요청 경로를 설정한다.
+		@RequestMapping의 value속성에 요청 경로를 설정한다.
 		- 요청 경로는 반드시 설정해야 하는 필수 정보이다.
 		- 속성이 하나일 때는 속성명을 생략할 수 있다.
 		- 컨트롤러의 클래스 레벨과 메서드 레벨로 지정할 수 있다.
-		- 클래스 레벨로 요청 경로에 지정하면 메서드 레벨에서 지정한 경로의 기본 경로로 취급된다.
+		- 클래스 레벨로 요청 경로를 지정하면 메서드 레벨에서 지정한 경로의 기본 경로로 취급된다.
 		- 클래스 레벨의 요청 경로에 메서드 레벨의 요청 경로를 덧붙인 형태가 최종 경로가 된다.
 		
 		[요청과 매핑]
@@ -90,156 +90,524 @@
 		
 	2. 경로 패턴 매핑
 		요청 경로를 동적으로 표현이 가능한 경로 패턴을 지정할 수 있다.
-		-  URL 경로 상의 변하는 값을 경로 변수로 취급한다.
+		- URL 경로 상의 변하는 값을 경로 변수로 취급한다.
 		- 경로 변수에 해당하는 값을 파라미터 변수에 설정할 수 있다.
 		
-		[요청과 매핑]
+		[요청과 매핑] 
 		요청 : http://localhost/board/read/100
-		매핑 : @RequestMapping(value="/board/read/{boardNo}")				
-			
+		매핑 : @RequestMapping(value="/board/read/{boardNo}")
+		
 	3. HTTP 메소드 매핑
 		method 속성을 사용하여 HTTP 메소드를 매핑 조건으로 지정할 수 있다.
-		화면으로 응답하는 경우에는 HTTP 메소드로 GET방식과 POST방식 두가지를 사용할 수 있다		
+		화면으로 응답하는 경우에는 HTTP 메소드로 GET방식과 POST방식 두가지를 사용할 수 있다.
 		
-		[요청과 매핑]
+		[요청과 매핑] 	
 		요청 : http://localhost/board/register
-		매핑 : @RequestMapping(value="/board/register", method = RequestMethod.GET)		
-		매핑 : @RequestMapping(value="/board/register", method = RequestMethod.POST)		
+		매핑 : @RequestMapping(value="/board/register", method=RequestMethod.GET)	
+		매핑 : @RequestMapping(value="/board/register", method=RequestMethod.POST)	
 			
 	4. Params 매핑
-		요청 파라미터를 매핑 조건으로 지정하는 경우에는  params 속성을 사용한다.
-		버튼이나 링크에 따라 호출할 메서드를 바궈야 할 때 사용한다.
+		요청 파라미터를 매핑 조건으로 지정하는 경우에는 params 속성을 사용한다.
+		버튼이나 링크에 따라 호출할 메서드를 바꿔야 할 때 사용한다.
 		
-		[요청과 매핑]
+		[요청과 매핑] 	
 		요청 : http://localhost/board/get?register
-		매핑 : @RequestMapping(value="/board/{boardNo}", method = RequestMethod.PUT)				
-			
-	5. Header 매핑
-		요청 헤더를 매핑 조건으로 지정하는 경우에는 headers 속성을 사용한다.			
-			
-		[요청과 매핑]
-		요청 : http://localhost/board/100
-		매핑 : @RequestMapping(value="/board/{boardNo}", method = RequestMethod.PUT, headers = "X-HTTP-Method-Override=PUT")
-	
-	6. Content Type 매핑
-		요청의 Content Type 헤더값을 매핑 조건으로 지정하는 경우에는 consumes 속성을 사용한다.
+		매핑 : @RequestMapping(value="/board/get", method=RequestMethod.GET, params="register")
 		
-		[요청과 매핑]
+	5. Headers 매핑
+		요청 헤더를 매핑 조건으로 지정하는 경우에는 headers 속성을 사용한다.
+		
+		[요청과 매핑] 	
 		요청 : http://localhost/board/100
-		매핑 : @RequestMapping(value="/board/{boardNo}", method = RequestMethod.POST, consumes = "application/json")
+		매핑 : @RequestMapping(value="/board/{boardNo}", method=RequestMethod.PUT, headers="X-HTTP-Method-Override=PUT")	
+		
+	6. Content Type 매핑
+		요청의 Content-Type 헤더 값을 매핑 조건으로 지정하는 경우에는 consumes 속성을 사용한다.
+		
+		[요청과 매핑] 	
+		요청 : http://localhost/board/100
+		매핑 : @RequestMapping(value="/board/{boardNo}", method=RequestMethod.POST, consumes="application/json")
 		
 	7. Accept 매핑
-		요청 Accept 헤더 값을 매핑 조건으로 지정하는 경우에는 produces, 속성을 사용한다.
+		요청 Accept 헤더 값을 매핑 조건으로 지정하는 경우에는 produces 속성을 사용한다.
 		
-		[요청과 매핑]
+		[요청과 매핑] 	
 		요청 : http://localhost/board/100
-		매핑 : @RequestMapping(value="/board/{boardNo}", method = RequestMethod.GET, produces = "application/json")
-			
-┏────────────────────────────┐
-│	4장. 컨트롤러 응답		 │
-└────────────────────────────┛
-	
+		매핑 : @RequestMapping(value="/board/{boardNo}", method=RequestMethod.GET, produces="application/json")
+		
+┌──────────────────────
+│	4장. 컨트롤러 응답
+└──────────────────────
+		
 	1. Void 타입
 		호출하는 URL과 동일한 뷰 이름을 나타내기 위해 사용한다.
 		
 		[요청과 응답]
-		요청 : http://localhost/goHeom0101
-		응답 : void(요청한 경로와 동일한 뷰 이름으로 리턴)
+		요청 : http://localhost/goHome0101
+		응답 : void (요청한 경로와 동일한 뷰 이름으로 리턴)
 		
 	2. String 타입
 		뷰 파일의 경로와 파일 이름을 나타내기 위해 사용한다.
 		
 		[요청과 응답]
-		요청 : http://localhost/goHeom0201
-		응답 : String( 반환된 값으로 페이지를 찾는다.)
+		요청 : http://localhost/goHome0201
+		응답 : String (반환된 값으로 페이지를 찾는다.)
 		
 	3. 자바빈즈 클래스 타입
 		JSON 객체 타입의 데이터를 만들어서 반환하는 용도로 사용한다.
-		- jackson-databind 라이브러리를 설치하고 @ResponseBody를 지정하여 객체를 응답으로 내보낼 수 있다.
-		- 둘중에 1개라도 하지 않는 경우, 에러가 발생할 수 있다.		
-				
+		- jackson-databind 라이브러리를 설치하고 @ReseponseBody를 지정하여 객체를 응답으로 내보낼 수 있다.
+		- 둘중에 1개라도 하지 않는 경우, 에러가 발생할 수 있다.
+		
 		[요청과 응답]
-		요청 : http://localhost/goHeom0301
-		응답 : 자바빈즈 ( 객체에 값이 담겨 해당 객체를 리턴한다.)
+		요청 : http://localhost/goHome0301
+		응답 : 자바빈즈 (객체에 값이 담겨 해당 객체를 리턴한다.)
 		
 	4. 컬렉션 List 타입
-		JSON 객체 타입의 데이터를 만들어서 반환하는 용도로 사용한다.
+		JSON 객체 배열 타입의 데이터를 만들어서 반환하는 용도로 사용한다.
 		- 반환값이 컬렉션 List 타입이면 JSON 객체 배열 타입으로 자동으로 반환한다.
-				
+		
 		[요청과 응답]
-		요청 : http://localhost/goHeom0401
+		요청 : http://localhost/goHome0401
 		응답 : 컬렉션 List
 		
 	5. 컬렉션 Map 타입
 		Map 형태의 컬렉션 자료를 JSON 객체 타입의 데이터로 만들어서 반환하는 용도로 사용한다.
-		- 반환값이 컬렉션 Map 타입이면 JSON 객체 타입으로 자동으로 변환된다.
+		- 반환값이 컬렉션 Map 타입이면 JSON 객체 타입으로 자동으로 변환한다.
 		
-				
 		[요청과 응답]
-		요청 : http://localhost/goHeom0501
+		요청 : http://localhost/goHome0501
 		응답 : 컬렉션 Map
 		
 	6. ResponseEntity<Void> 타입
-		response할 때 HTTP 헤더 정보와 내용을 가공하는 용도로 사용한다.
-		- 반환값이 해당 URL이므로 개발자도구 > 네트워킹 탭을 활용하여 응답된 페이지 정보를 확인할 수 있다.
+		response 할 때 HTTP 헤더 정보와 내용을 가공하는 용도로 사용한다.
+		- 반환값이 해당 URL이므로 개발자 도구 > 네트워킹 탭을 활용하여 응답된 페이지 정보를 확인할 수 있다.
 		
-				
 		[요청과 응답]
-		요청 : http://localhost/goHeom0601
+		요청 : http://localhost/goHome0601
 		응답 : ResponseEntity<Void>
 		
 	7. ResponseEntity<String> 타입
-		response할 때 HTTP 헤더 정보와 문자열 데이터를 전달하는 용도로 사용한다.
-		- 페이지에서 결과값으로 문자열을 함께 확인할 수 있다.
+		response 할 때 HTTP 헤더 정보와 문자열 데이터를 전달하는 용도로 사용한다.
+		- 페이지에서 결과값으로 문자열을 함께 확인 할 수 있다.
 		
-				
 		[요청과 응답]
-		요청 : http://localhost/goHeom0701
+		요청 : http://localhost/goHome0701
 		응답 : ResponseEntity<String>
 		
 	8. ResponseEntity<Member> 타입
-		response할 때 HTTP 헤더 정보와 객체 데이터를 전달하는 용도로 사용한다.
-				
+		response 할 때 HTTP 헤더 정보와 객체 데이터를 전달하는 용도로 사용한다.
+		
 		[요청과 응답]
-		요청 : http://localhost/goHeom0801
+		요청 : http://localhost/goHome0801
 		응답 : ResponseEntity<Member>
 		
 	9. ResponseEntity<List<Member>> 타입
-		response할 때 HTTP 헤더 정보와 객체 배열 데이터를 전달하는 용도로 사용한다.
-				
+		response 할 때 HTTP 헤더 정보와 객체 배열 데이터를 전달하는 용도로 사용한다.
+		
 		[요청과 응답]
-		요청 : http://localhost/goHeom0901
-		응답 : ResponseEntity<List<Member>>
+		요청 : http://localhost/goHome0901
+		응답 : ResponseEntity<List<member>>
 		
 	10. ResponseEntity<Map<String, Member>> 타입
-		response할 때 HTTP 헤더 정보와 객체데이터를 Map 형태로 전달하는 용도로 사용한다.
-				
-		[요청과 응답]
-		요청 : http://localhost/goHeom1001
-		응답 : ResponseEntity<Map<String, Member>>
+		response 할 때 HTTP 헤더 정보와 객체 데이터를 Map 형태로 전달하는 용도로 사용한다.
 		
-	11. ResponseEntity<byte[]> 타입
-		response할 때 HTTP 헤더 정보와 바이너리 파일데이터를 전달하는 용도로 사용한다.
-		- 파일을 처리하는 경우에는 의존 라이브러리(commons-io)를 추가해야한다.
-		- 추가는 pom.xml에서 dependency를 추가한다
-				
 		[요청과 응답]
-		요청 : http://localhost/goHeom1101
-			   http://localhost/goHeom1102
+		요청 : http://localhost/goHome1001
+		응답 : RepsonseEntity<Map<String, Member>>
+		
+	11. ResponseEntity<byty[]> 타입
+		response 할 때 HTTP 헤더 정보와 바이너리 파일 데이터를 전달하는 용도로 사용한다.
+		- 파일을 처리하는 경우에는 의존 라이브러리(commons-io)를 추가해야한다.
+		- 추가는 pom.xml에서 dependency를 추가한다.
+		
+		[요청과 응답]
+		요청 : http://localhost/goHome1101
+			 http://localhost/goHome1102
 		응답 : ResponseEntity<byte[]>
 		
-		
-		
-		
-		
-		
-		
-		
-				
+┌──────────────────────
+│	5장. 컨트롤러 요청 처리
+└──────────────────────
 			
+	1. 컨트롤러 메서드 매개변수
+	
+		주요 매개 변수
+		- Model
+			이동 대상에 전달할 데이터를 가지고 있는 인터페이스
+		- RedirectAttributes
+			리다이렉트 대상에 전달할 데이터를 가지고 있는 인터페이스
+		- 자바빈즈 클래스
+			요청 파라미터를 가지고 있는 자바빈즈 클래스
+		- MultipartFile
+			Multipart 요청을 사용해 업로드 된 파일 정보를 가지고 있는 인터페이스
+		- BindingResult
+			도메인 클래스의 입력값 검증 결과를 가지고 있는 인터페이스
+		- java.security.Principal
+			클라이언트 인증을 위한 사용자 정보를 가지고 있는 인터페이스
+	
+	2. 요청 처리
+	
+		1. URL 경로 상의 쿼리 파라미터 정보로부터 요청 데이터를 취득할 수 있다.
+		[요청과 처리]
+		요청 : /register?userId=hongkd&password=1234 (a태그를 이용)
+		처리 : registerByparameter(String userId, String password)			
 			
-			
-			
-			
-			
+		2. URL 경로 상의 경로 변수로부터 요청 데이터를 취득할 수 있다.
+		[요청과 처리]
+		요청 : /register/hongkd (a태그를 이용)
+		처리 : String registerByPath(String userId)
 		
+		3. HTML Form 필드명과 컨트롤러 매개변수명이 일치하면 요청 데이터를 취득할 수 있다.
+		[요청과 처리]
+		요청 : /register01 (form 태그를 이용)
+		처리 : String register01(String userId)
+		
+		4. HTML Form 필드가 여러개일 경우에도 컨트롤러 매개변수명이 일치하면 요청 데이터를 취득할 수 있다.
+		[요청과 처리]
+		요청 : /register02 (form 태그를 이용)
+		처리 : String register02(String userId, String password)
+		
+		5. HTML Form 필드가 여러개일 경우에 컨트롤러 매개변수의 위치는 상관없다.
+		[요청과 처리]
+		요청 : /register03 (form 태그를 이용)
+		처리 : String register03(String password, String userId)
+		
+		6. HTML Form 필드값이 숫자일 경우에는 컨트롤러 매개변수 타입이 문자열이면 그대로 문자열 형태로 요청 데이터를 취득한다.
+		[요청과 처리]
+		요청 : /register04 (form 태그를 이용)
+		처리 : String register04(String userId, String password, String coin)
+		
+		7. HTML Form 필드값이 숫자일 경우에는 컨트롤러 매개변수 타입이 숫자형이면 숫자로 타입변환하여 요청 데이터를 취득한다.
+		[요청과 처리]
+		요청 : /register05 (form 태그를 이용)
+		처리 : String register05(String userId, String password, int coin)
+		
+	3. 요청 데이터 처리 어노테이션
+	
+		@PathVariable
+		- URL에서 경로 변수 값을 가져오기 위한 어노테이션
+		@RequestParam
+		- 요청 파라미터 값을 가져오기 위한 어노테이션
+		@RequestHeader
+		- 요청 헤더 값을 가져오기 위한 어노테이션
+		@RequestBody
+		- 요청 본문 내용을 가져오기 위한 어노테이션
+		@CookieValue
+		- 쿠키 값을 가져오기 위한 어노테이션
+		
+		1. URL 경로 상의 경로 변수로부터 요청 데이터를 취득할 수 있다.
+		[요청과 처리]
+		요청 : /register/hongkd (a 태그를 이용)
+		처리 : String registerByPath(@PathVariable String userId)
+		
+		2. URL 경로 상의 경로 변수가 여러개일때 @PathVariable 어노테이션을 사용하여 특정한 경로 변수명을 지정해준다.
+		[요청과 처리]
+		요청 : /register/hongkd/100 (a 태그를 이용)
+		처리 : String registerByPath(@PathVariable("userId") String userId, @PathVariable("coin") int coin)
+			
+		3. HTML 폼의 필드명과 컨트롤러 매개변수명이 일치하면 요청을 처리할 수 있다.
+		[요청과 처리]
+		요청 : /register0101 (form 태그를 이용 - id name 설정 : userId)
+		처리 : String register0101(String userId)
+		
+		4. HTML Form 필드명과 컨트롤러 매개변수명이 일치(대소문자 구분)하지 않으면 요청을 처리할 수 없다.
+		[요청과 처리]
+		요청 : /register0201 (form 태그를 이용 - id name 설정 : userId)
+		처리 : String register0201(String username)
+		
+		5. @RequestParam 어노테이션을 사용하여 특정한 HTML Form의 필드명을 지정하여 요청을 처리한다.
+		[요청과 처리]
+		요청 : /register0202 (form 태그를 이용 - id name 설정 : userId)
+		처리 : String register0202(@RequestParam("userId") String username)
+		
+	4. 요청 처리 자바빈즈
+	
+		1. 폼 텍스트 필드 요소값을 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /beans/register01 (form 태그를 이용)
+		처리 : String registerJavaBeans01(Member member)
+		
+		2. 폼 텍스트 필드 요소값을 자바빈즈 매개변수와 기존 데이터 타입인 정수 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /beans/register02 (from 태그를 이용)
+		처리 : String registerJavaBeans02(Member member, int coin)
+		
+		3. 여러 개의 폼 텍스트 필드 요소값을 매개변수 순서와 상관없이 매개변수명을 기준으로 처리한다.
+		[요청과 처리]
+		요청 : /beans/registerJavaBeans03(int uid, Member member)
+		처리 : String registerJavaBeans03(int uid, Member member)
+		
+	5. Data 타입 처리
+		스프링 MVC는 Date 타입의 데이터를 처리하는 여러 방법을 제공합니다.
+		따로 지정하지 않으면 변환에 적합한 날짜 문자열 형식은 yyyy/MM/dd입니다.
+		
+		1. 쿼리 파라미터(dateOfBirth=1234)로 전달받은 값이 날짜 문자열 형식에 맞지 않아 Date 타입으로 변환에 실패한다.
+		[요청과 처리]
+		요청 : /registerByGet01?userId=hongkd&dateOfBirth=1234
+		처리 : registerByGet01(String userId, Date dateOfBirth)
+		
+		2. 쿼리 파라미터(dateOfBirth=2022-11-28)로 전달받은 값이 날짜 문자열 형식에 맞지 않아 Date 타입으로 변환에 실패한다.
+		[요청과 처리]
+		요청 : /registerByGet01?userId=hongkd&dateOfBirth=2022-11-28
+		처리 : registerByGet01(String userId, Date dateOfBirth)
+		
+		3. 쿼리 파라미터(dateOfBirth=20221128)로 전달받은 값이 날짜 문자열 형식에 맞지 않아 Date 타입으로 변환에 실패한다.
+		[요청과 처리]
+		요청 : /registerByGet01?userId=hongkd&dateOfBirth=20221128
+		처리 : registerByGet01(String userId, Date dateOfBirth)
+			
+		4. 쿼리 파라미터(dateOfBirth=2022/11/28)로 전달받은 값이 날짜 문자열 형식에 맞아 Date 타입으로 변환에 성공한다.
+		[요청과 처리]
+		요청 : /registerByGet01?userId=hongkd&dateOfBirth=2022/11/28
+		처리 : registerByGet01(String userId, Date dateOfBirth)
+		[성공!!]
+		
+		5. Member 매개변수와 쿼리 파라미터(dataOfBirth=20221128) 전달받은 값이 날짜 문자열 형식에 맞지않아 Date타입으로 변환에 실패한다.
+		[요청과 처리]
+		요청 : /registerByGet02?userId=hongkd&dateOfBirth=20221128
+		처리 : String registerByGet02(Member member)
+		
+		6. Member 매개변수와 폼 방식 : : : 요청 전달받은 값이 날짜 문자열 형식이 맞지 않아 Date 타입으로 변환에 실패한다
+		[요청과 처리]
+		요청 : /register (form 태그 이요8ㅇ - dataOfBirth 값을 20221128 설정)
+		처리 : String register(Member member)
+		
+	6. @DateTimeFormat 어노테이션
+		 @DateTimeFormat 어노테이션의 pattern 속성 값에 원하는 날짜 형식을 지정할 수 있다.
+		 
+		 요청: 5번 항목에 해당하는 요청 주를 이용하여 테스트 시, 날짜형식 패턴이 'yyyyMMdd'와 같은 형식으로 요청한 경우,
+		 	  [성공]으로 정상적인 날짜 데이터를 확인할 수 있다.
+		 처리 : 5번항목 참고
+		 
+	7. 폼 방식 요청 처리
+	
+		1. 폼 텍스트 필드 요소값을 기본 데이터 타입인 문자열 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerUserId 
+		처리 : String registerUserId(String userId)	 	  
+		
+		2. 폼 텍스트 필드 요소값을 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerMemberUserId 
+		처리 : String registerMemberUserId(Member member)
+			 	  
+		3. 폼 비밀번호 필드 요소값을 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerPassword
+		처리 : String registerPassword(Member member )	 	  
+
+		4. 폼 라디오버튼 요소 값을 기본 데이터 타입인 문자열 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerRadio
+		처리 : String registerRadio(String gender)	 	  
+
+		5. 폼 셀렉트 박스 요소값을 기본 데이터 타입인 문자열 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerSelect
+		처리 : String registerSelect(String nationality)	 
+			  
+		6. 복수 선택이 가능한 폼 셀렉트 박스 요소값을 기본 데이터 타입인 문자열 타입 매개변수로 처리한다. 
+		[요청과 처리]
+		요청 : /registerMultipleSelect01
+		처리 : String registerMultipleSelect01(String cars)
+		[ex) cars=volvo,jeep,bmw]	 	  
+
+		7. 복수 선택이 가능한 폼 셀렉트 박스 요소값을 문자열 배열 타입 매개변수로 처리한다. 
+		[요청과 처리]
+		요청 : /registerMultipleSelect02
+		처리 : String registerMultipleSelect02(String[] carArray)
+		[ex) carArray[volvo,jeep,bmw] 형태로 들어옴 (각 index를 가짐)]	 	  
+
+		8. 복수 선택이 가능한 폼 셀렉트 박스 요소값을 문자열 요소를 가진 리스트 컬렉션 타입 매개변수로 처리한다. 
+		[요청과 처리]
+		요청 : /registerMultipleSelect03
+		처리 : String registerMultipleSelect03(ArrayList<String> carList)
+		[ex) carList null] ::: 리스트로 값을 가져올 시 null
+		
+		9. 폼 체크박스 요소 값을 기본 데이터 타입인 문자열 타입 매개변수로 처리한다. 
+		[요청과 처리]
+		요청 : /registerCheckbox01
+		처리 : String registerCheckbox01(String hobby)
+		[ex) hobby = Sports, Movie]
+		
+		10. 폼 체크박스 요소 값을 문자열 배열 타입 매개변수로 처리한다. 
+		[요청과 처리]
+		요청 : /registerCheckbox02
+		처리 : String registerCheckbox02(String[] hobbyArray)
+		[ex) hobbyArray[Sports, Movie] 형태로 들어옴 (각 index를 가짐)]	 
+		
+		11. 폼 체크박스 요속밧을 문자열 요소를 가진 리스트 컬렉션 타입 매개변수로 처리한다. 
+		[요청과 처리]
+		요청 : /registerCheckbox03
+		처리 : String registerCheckbox03(List<String> hobbyList)
+		[No primary or default constructor found for interface java.util.List 에러발생]
+		
+		12. 폼 체크박스 요소 값을 기본 데이터 타입인 문자열 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerCheckbox04
+		처리 : String registerCheckbox04(String developer)
+		[체크되면 value에 설정된 값, 체크 안되면 null]
+		
+		13. 폼 체크박스 요소 값을 기본 데이터 타입인 불리언 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerCheckbox05
+		처리 : String registerCheckbox05(boolean foreigner)
+		[체크되면 value에 설정된 값 true, 체크 안되면 null]
+		
+		14. 폼 텍스트 필드 요소값을 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerAddress
+		처리 : String registerAddress(Address address)
+		
+		15. 폼 텍스트 필드 요소값을 중첩된 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerUserAddress
+		처리 : String registerUserAddress(Member member)
+		
+		16. 폼 텍스트 필드 요소값을 중첩된 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerUserCardList
+		처리 : String registerUserCardList(Member member)
+		
+		17. 폼 텍스트 영역 요소 값을 기본 데이터 타입인 문자열 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerTextArea
+		처리 : String registerTextArea(String introduction)
+		
+		18. 폼 텍스트 영역 요소 값을 Date 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerDate01
+		처리 : String registerDate01(Date dateOfBirth)
+		
+		19. 폼 텍스트 영역 요소 값을 @DateTimeFormat 어노테이션을 지정하여 Date 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerDate02
+		처리 : String registerDate02(@DateTimeFormat(patten = "yyyyMMdd") Date dateOfBirth)
+		
+	8. 파일 업로드 폼 방식 요청 처리
+		***** 중요 ! ! !
+		[파일 업로드 폼 방식 요청 처리를 하기전, 준비사항]
+		[1]. pom.xml에 commons-fileupload, commons-io 라이브러리 의존 관계 등록
+		 - maven project update를 진행하여 업데이트한다.
+		 	> 업데이트를 진행하지 않는 경우, 내가 등록한 의존관계가 제대로 적용되지않아 라이브러리를 사용하는데 있어 에러가 발생할 수 있습니다	
+		 	> 업데이트를 진행할 때, 하단 오른쪽에 progress Bar 형태가 다운로드 되고 있는 형태로 바뀌고, 100%로 바뀌면 다운로드가 완료되어 적용이 완료된 것입니다.
+		 	> Maven Project Update를 진행하였는데 내가 작성하고 있는 프로젝트에서 에러가 발생한다?
+		 		> Clean! Clean! Clean! Clean! ! ! ! !
+		[2]. web.xml에 모든 경로에 대해서 MultipartFilter를 등록합니다.
+		 - 스프링에서 제공하는 MultipartFilter를 이용합니다.
+		 
+		***** 위와 같은 설정을 진행하였는데도 에러가 나는 경우 조치방법
+		[3]. servers >  context/xml 로 이동하여 Context 태그 옵선을 추가합니다.
+		 - [ allowCasualMultipartparsing="true" path="/" ] 옵션 추가 (Context 태그내)
+		 - ex) <Context allowCasualMultipartparsing="true" path="/"	> ..... </Context>
+		 
+		1. 파일 업로드 폼 파일 요소값과 스프링 MVC가 지원하는 MultipartFile 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile01
+		처리 : String registerFile01(MultipartFile picture) throws Exception
+		
+		2. 파일 업로드 폼 파일 요소값과 스프링 MVC가 지원하는 MultipartFile 매개변수와 문자열 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile02
+		처리 : String registerFile02(String userId, String password,  MultipartFile picture) throws Exception
+		
+		3. 파일 업로드 폼 파일 요소값과 텍스트 필드 요소값을 MultipartFile 매개변수와 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile03
+		처리 : String registerFile03(Member member,  MultipartFile picture) throws Exception
+		
+		4. 파일 업로드 폼 파일 요소값과 텍스트 필드 요소값을 FileMember 타입의 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile04
+		처리 : String registerFile04(FileMember fileMember) throws Exception
+		
+		5. 여러개의 파일 업로드를 폼 파일 요소값을 MultipartFile 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile05
+		처리 : String registerFile05(MultipartFile picture, MultipartFile picture2) throws Exception
+		
+		6. 여러개의 파일 업로드를 폼 파일 요소값을 MultipartFile 타입의 요소를 가진 리스트 컬렉션 타입 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile06
+		처리 : String registerFile06(List<MultipartFile> pictureList) throws Exception
+		[*** 리스트로 가져오는 경우 null발생]
+		
+		7. 여러개의 파일 업로드를 폼 파일 요소값과 텍스트 필드 요소값을 MultipartFileMember 타입의 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile07
+		처리 : String registerFile07(MultiFileMember multiFileMember) throws Exception
+		
+		//7-2
+		8. 여러개의 파일 업로드를 폼 파일 요소값을 MultipartFileMember 타입의 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile07
+		처리 : String registerFile07(MultiFileMember multiFileMember) throws Exception
+		
+		9. 파일 업로드를 폼 파일 요소값과 텍스트 필드 요소값을 MultipartFile 타입의 배열 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /registerFile08
+		처리 : String registerFile08(MultipartFile[] pictureList) throws Exception
+		
+	9. Ajax 방식 요청 처리
+		1. URL 경로 상의 경로 변수 값을 @PathVariable 어노테이션을 지정하여 문자열 매개 변수로 처리한다.
+		[요청과 처리]
+		요청 : /ajax/register/hongkd
+		처리 : ResponseEntity<String> ajaxRegister01(@PathVariable("userId") String userId)
+		
+		2. URL 경로 상의 여러개의 경로 변수 값을 @PathVariable 어노테이션을 지정하여 문자열 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /ajax/register/hongkd/pw01
+		처리 : public ResponseEntity<String> ajaxRegister02(@PathVariable("userId") String userId,
+															@PathVariable("password") String password)
+		
+		3. 객체 타입의 JSON 요청 데이터를 @PathVariable 어노테이션을 지정하여 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /ajax/register03
+		처리 : ResponseEntity<String> ajaxRegister03(@RequestBody Member member)
+		
+		4. 객체 타입의 JSON 요청 데이터는 문자열 매개변수로 처리할 수 없다.
+		[요청과 처리]
+		요청 : /ajax/register04
+		처리 : ResponseEntity<String> ajaxRegister04(String userId)
+		[실패!! 기본 타입으로는 데이터 받을 수 없음]
+		
+		5. 요청 URL에 쿼리파라미터를 붙여서 전달하면 문자열 매개변수로 처리한다
+		[요청과 처리]
+		요청 : /ajax/register05?userId=user01
+		처리 : ResponseEntity<String> ajaxRegister05(String userId, String password)
+		[넘겨 받은 userId는 값을 넘겨받고, password는 값을 받지 못한다.]
+		
+		6. 객체 타입의 JSON 요청 데이터를 @PathVariable 어노테이션을 지정한 문자열 매개변수와
+			@ReauestBody 어노테이션을 지정한 자바빈즈 매개변수로 처리한다.
+		[요청과 처리]
+		요청 : /ajax/register/honfkd
+		처리 : ResponseEntity<String> ajaxRegister06(@PathVariable("userId") String userId,
+												     @RequestBody Member member)
+		
+		7. 객체 배열 타입의 JSON 요청 데이터를 자바빈즈 요소를 가진 리스트 컬렉션 매개변수에 
+			@ReauestBody 어노테이션을 지정하여 처리한다.
+		[요청과 처리]
+		요청 : /ajax/register07
+		처리 : ResponseEntity<String> ajaxRegister07(@RequestBody List<Member> memberList)
+												     
+		8. 중첩된 객체 배열 타입의 JSON 요청 데이터를 @ReauestBody 어노테이션을 지정하여 
+			중첩된 자바빈즈 매개변수로 처리한다
+		[요청과 처리]
+		요청 : /ajax/register08
+		처리 : ResponseEntity<String> ajaxRegister08(@RequestBody Member member)
+		
+		9. 중첩된 객체 타입의 JSON 요청 데이터를 @ReauestBody 어노테이션을 지정하여 중첩된 자바빈즈 매개변수로 처리한다
+		[요청과 처리]
+		요청 : /ajax/register09
+		처리 : ResponseEntity<String> ajaxRegister09(@RequestBody Member member)
+	
+	10. 파일업로드 Ajax 방식 요청 처리
+	
+		1. Ajax 방식으로 전달한 파일 요소값을 스프링 MVC가 지원하는 MultipartFile 매개변수로 처리한다.	
+		[요청과 처리]
+		요청 : /ajax/uploadAjax
+		처리 : esponseEntity<String> uploadAjax(MultipartFile file)
+		> input type='file' change 이벤트를 이용한 비동기 파일 업로드로 업로드한 이미지가 서버로 넘어가고 결과값으로 
+		  'UPLOAD SUCCESS'를 얻어오면 img 태그에 preview 항목으로 내가 업로드한 이미지를 썸네일로 미리 볼 수 있는 기능을 구현
+
+			
