@@ -610,4 +610,126 @@
 		> input type='file' change 이벤트를 이용한 비동기 파일 업로드로 업로드한 이미지가 서버로 넘어가고 결과값으로 
 		  'UPLOAD SUCCESS'를 얻어오면 img 태그에 preview 항목으로 내가 업로드한 이미지를 썸네일로 미리 볼 수 있는 기능을 구현
 
+┌──────────────────────
+│	6장. 데이터 전달자 모델  20221129
+└──────────────────────
 			
+	1. 모델객체	
+		Model 객체는 뷰(View)에 컨트롤러에서 생성된 데이터를 담아서 전달하는 역할을 한다.
+		
+		1. Model 객체의 addAttribute()메서드를 호출하여 데이터를 전달한다.
+		[요청과 처리]
+		요청 : /
+		처리 : home(Locale locale, Model model)
+			 model.addAttribute("serverTime", formatterDate)
+			 
+		2. 모델을 통한 데이터 전달
+		Model 객체를 통해서 다양한 데이터를 뷰(View)에 전달할 수 있다.
+		
+		1. 매개변수에 선언된 Model 객체의 addAttribute() 메서드를 호출하여 데이터를 뷰(View)에 전달한다.
+		[요청과 처리]
+		요청 : /read01
+		처리 : String read01(Model model)
+			 model.addAttribute("userId", "hongkd");
+			 model.addAttribute("password", "1234");
+			 model.addAttribute("email", "aaa@ccc.com");
+			 ...
+		
+		2. Model 객체에 자바빈즈 클래스 객체를 값으로만 전달할 때는 뷰에서 참조할 이름을 클래스명의 앞글자를 소문자로 변화하여 처리한다
+		[요청과 처리]
+		요청 : /read02
+		처리 : String read02(Model model)
+			  model.addAttribute(member);
+			 
+			 
+		3. Model 객체에 자바빈즈 클래스 객체를 특정한 이름을 지정하여 전달할 수 있다.
+		[요청과 처리]
+		요청 : /read03
+		처리 : String read01(Model model)
+			 model.addAttribute("user", member);
+			 
+		4. Model 객체를 통해 배열과 컬렉션 객체를 전달할 수 있다.
+		[요청과 처리]
+		요청 : /read04
+		처리 : String read01(Model model)
+			 model.addAttribute("carArray", carArray);
+			 model.addAttribute("carList", carList);
+			  ....
+			  
+		5. Model 객체를 통해 중첩된 자바빈즈 클래스 객체를 전달할 수 있다.
+		[요청과 처리]
+		요청 : /read05
+		처리 : String read05(Model model)
+			 model.addAttribute("user", member);
+			 
+	
+		6. Model 객체를 통해 다양한 타입의 값을 전달할 수 있다.
+		[요청과 처리]
+		요청 : /read06
+		처리 : String read06(Model model)
+			 model.addAttribute("user", member);
+			 
+	3. @ModelAttribute 어노테이션
+		@ModelAttribute 어노테이션은 전달 받은 매개변수를 강제로 Model에 담아서 전달하도록 할 때 필요한 어노테이션입니다.
+		
+		1. 기본자료형은 매개변로 선언하더라도 기본적으로 전달되지 않는다. 		 
+		[요청과 처리]
+		요청 : /modelattribute/register01
+		처리 : String register01(String userId)
+			  - 기본 타입의 매개변수는 페이지로 전달되지 않는다.
+			  
+		2. 기본 자료형인 매개변수에  @ModelAttribute 어노테이션을 지정하여 데이터를 전달한다. 
+		[요청과 처리]
+		요청 : /modelattribute/register02
+		처리 : String register02(@ModelAttribute("userId") String userId)
+			  - @ModelAttribute 어노테이션을 이용해서 데이터를 전달한다
+			  
+		3. 기본 자료형인 매개변수가 여러 개인 경우 각각의 매개변수에 @ModelAttribute 어노테이션을 지정하여 데이터를 전달한다. 
+		[요청과 처리]
+		요청 : /modelattribute/register03
+		처리 : String register03(@ModelAttribute("userId") String userId, @ModelAttribute("password") String password )
+		
+		4. 자바빈즈 규칙에 맞는 객체는 매개변수로 선언하면 기본적으로 전달된다
+		[요청과 처리]
+		요청 : /modelattribute/register04
+		처리 : String register04(Member member)
+			  
+		5. 자바빈즈 규칙에 맞는 객체는 매개변수로 선언하면 기본적으로 전달된다 (2)
+		[요청과 처리]
+		요청 : /modelattribute/register05
+		처리 : String register05(Member member)
+			  - Member 클래스 안에 있는 Address까지 출력 예시
+	
+	4. RedirectAttributes 타입
+		RedirectAttributes는 일회성으로 데이터를 전달하는 용도로 사용된다.
+		
+		1. RedirectAttributes 객체에 일회서 데이터를 지정하여 전달한다.
+		[요청과 처리]
+		요청 : /redirectAttribute/register
+		처리 : String register(Member member, RedirectAttributes redirectAttributes)
+			  - 일회성으로 해당 페이지에서 넘어온 데이터를 다시 요청할 시 데이터가 사라진다.			  
+			  
+			  		  
+			  	 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		

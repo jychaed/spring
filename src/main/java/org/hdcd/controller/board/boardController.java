@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,7 +78,14 @@ public class BoardController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list() {
 		Logger.info("list() 실행...!");
-		return "success";
+		return"success";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(String keyword, Model model) {
+		Logger.info("search() 실행...!");
+		model.addAttribute("keyword", keyword);
+		return "board/search";
 	}
 	
 	@RequestMapping(value = "/read/{boardNo}") // 이녀석이 게시글 번호로 들어온다면 컨트롤 가능

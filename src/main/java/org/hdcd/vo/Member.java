@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Member {
-	private String userId = "a001";
+	private String userId;
 	private String password = "1234";
 	private String userName = "hongkd";
 	private int coin = 100;

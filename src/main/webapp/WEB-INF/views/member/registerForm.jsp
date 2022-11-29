@@ -417,7 +417,7 @@
 	 	
 	<p>
 		6) 여러 개의 파일 업로드를 폼 파일 요소 값을 MultipartFile 타입의 요소를 가진 리스트 컬렉션 타입 매개변수로 처리한다
-		<font style="color: red;"></font>
+		<font style="color: red;">받아올 수 없다!</font>
 	</p>
 	<form action="/registerFile06" method="post" enctype="Multipart/form-data">
 		<p>userId : <input type="text" name="userId" value="hongkd"> </p>
