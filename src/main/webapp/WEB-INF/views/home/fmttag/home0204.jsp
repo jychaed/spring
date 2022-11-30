@@ -11,7 +11,7 @@
 <body>
 	<p>5) pattern 속성을 사용하여 직접 사용할 서식을 지정한다</p>
 	<p>coin : ${coin }</p>
-	<fmt:parseNumber value="${coin }"  pattern="0,000.00" var="coinNum"/>
+	<fmt:parseNumber value="${coin }"  pattern="#,#00.0#" var="coinNum"/>
 	<!-- 이부분 안먹어서 선생님이 확인해보시기로함! -->
 	<p>coinNum : ${coinNum }</p>
 </body>
