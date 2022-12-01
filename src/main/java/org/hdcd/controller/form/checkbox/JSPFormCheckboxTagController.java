@@ -34,7 +34,7 @@ private static Logger logger = LoggerFactory.getLogger(JSPFormCheckboxTagControl
 		return "form/checkbox/registerForm01";
 	}
 	
-	// 2)
+	// 2) 객체를 생성하여 값을 설정한 후 화면에 전달한다.
 		@RequestMapping(value = "/registerForm02", method = RequestMethod.GET)
 		public String registerForm02(Model model) {
 			logger.info("registerForm02");

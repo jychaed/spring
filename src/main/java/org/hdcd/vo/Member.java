@@ -3,16 +3,37 @@ package org.hdcd.vo;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class Member {
+	// 문자열이 null이 아니고 trim한 길이가 0보다 크다는 것을 검사
+	@NotBlank
 	private String userId = "a001";
+	// 문자열이 null이 아니고 trim한 길이가 0보다 크다는 것을 검사
+	@NotBlank
 	private String password = "1234";
+	// 문자열 0~3사이 길이를 검사
+	@Size(max=3)
+	// 문자열이 null이 아니고 trim한 길이가 0보다 크다는 것을 검사
+	@NotBlank
 	private String userName = "hongkd";
 	private int coin = 100;
-	@DateTimeFormat(pattern = "yyyyMMdd")
+	// 과거 날짜인지를 검사
+	@Past
+	// @DateTimeFormat 설정시 사용
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	@DateTimeFormat(iso=ISO.DATE) // yyyy-MM-dd or yyyyMMdd 형식 둘다 받을 수 있다.
+//	@DateTimeFormat(iso=ISO.DATE_TIME)
 	private Date dateOfBirth;
-	
+	// 이메일 양식인지 검사
+	@Email
 	private String email;
 	private String gender;
 	private String hobby;
@@ -21,7 +42,11 @@ public class Member {
 	private boolean foreigner;
 	private String developer;
 	private String nationality;
+	// 중첩된 자바빈즈의 입력값 검증을 지정
+	@Valid
 	private Address address;
+	// 중첩된 자바빈즈의 입력값 검증을 지정
+	@Valid
 	private List<Card> cardList;
 	private String cars;
 	private String[] carArray;	

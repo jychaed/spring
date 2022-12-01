@@ -31,7 +31,7 @@ public class JSPFormTagController {
 		model.addAttribute("member", new Member());
 		// 클라이언트의 modelAttribute 설정과 서버와의 설정 연결을 위한 과정
 		// JSP(클라이언트)에서는 modelAttribute 속성 값으로 'member' 설정
-		// 컨트롤러 메소드 내 model.addAttribute('member',값) 르로 연결 준비!
+		// 컨트롤러 메소드 내 model.addAttribute('member',값) 으로 연결 준비!
 		return "home/formtag/registerForm02";
 	}
 	

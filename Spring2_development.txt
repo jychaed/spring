@@ -1262,14 +1262,594 @@
 		fn:split(str1, str2)	
 			>문자열을 구분자로 분할해서 문자열 배열을 만듭니다.
 			
+┌──────────────────────
+│	8장. 스프링 폼 태그
+└──────────────────────
 			
-			
-			
+	1. 스프링 폼 태그 라이브러리
 		
+		스프링 폼 HTML 폼을 표시하기 위한 태그 라이브러리이다.
+		스프링 폼을 이용하면 HTML 폼과 자바 객체를 쉽게 바인딩 할 수 있다.
+		
+		스프링 폼 커스텀 태그 목록
+		<form:form>
+			> 폼 요소를 생성한다.
+		<form:input>
+			> 텍스트 필드 요소를 생성한다
+		<form:password>
+			> 패스워드 필드 요소를 생성한다
+		<form:textarea>
+			> 텍스트 영역 요소를 생성한다.	
+		<form:checkboxes>
+			> 여러 개의 체크박스 요소를 생성한다.	
+		<form:checkboxe>
+			> 체크박스 요소를 생성한다.	
+		<form:radiobuttons>
+			> 여러 개의 라디오 버튼 요소를 생성한다.	
+		<form:radiobutton>
+			> 라디오 버튼 요소를 생성한다.	
+		<form:select>
+			> 셀렉트 박스 요소를 생성한다.	
+		<form:hidden>
+			> 숨겨진 필드 요소를 생성한다.	
+		<form:lavel>
+			> 라벨 요소를 생성한다.	
+		<form:button>
+			> 버튼 요소를 생성한다.	
+		<form:errors>
+			> 입력값 검증 오류를 표시한다
+			
+		스프링 폼 태그 라이브러리 선언		
+		[ <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>  ]
+		
+	2. 폼 요소
 	
+		HTML 폼을 출력하려면 <form:form> 요소를 사용한다.
+		
+		*** jsp에서 form:form modelAttribute의 속성 값과 서버 컨트롤러 메소드 model.addAttribute의 속성명이 같은 상태로 연결이 
+		되어 있어야 페이지 에러가 발생하지 않는다.
+		
+		1. 모델에 폼 객체를 추가하지 않으면 에러가 발생한다.
+		[요청과 처리]
+		요청: formtag/registerForm01_Error
+		처리: String registerForm01_Error(Model model)
+		
+		2.  폼 객체의 속성 명과 스프링 폼 태그의 modelAttribute 속성값이 일치해야 한다.
+		[요청과 처리]
+		요청: formtag/registerForm02
+		처리: String registerForm01(Model model)
+		
+		
+		3. 폼 객체의 속성명과 스프링 폼 태그의 modelAttribute 속성값이 일치하지 않으면 에러가 발생한다.
+		[요청과 처리]
+		요청: formtag/registerForm03
+		처리: String registerForm03(Model model) 
+			model.addAttribute("user", new Member());
+		
+		
+		4. 폼 객체의 속성명과 스프링 폼 태그의 modelAttribute 속성값이 일치해야한다.
+		[요청과 처리]
+		요청: formtag/registerForm04
+		처리: String registerForm04(Model model) 
+			model.addAttribute("user", new Member());
+		
+		
+		5. 컨트롤러 메소드의 매개변수로 자바빈즈 객체가 전달이 되면 기본적으로 다시 화면으로 전달된다.
+		[요청과 처리]
+		요청: formtag/registerForm05
+		처리: String registerForm05(Model model) 
+			자바빈즈 클래스를 바로 넘기기 때문에 model로 넘기지 않아도 설정가능
+		
+		
+		6. 폼 객체의 속성명은 직접 지정하지 않으면 폼 객체의 클래스명의 맨 처음 문자를 소문자로 변환하여 처리한다.
+		[요청과 처리]
+		요청: formtag/registerForm06
+		처리: String registerForm06(Member user)
+			자바빈즈 클래스명의 앞자리가 소문자로 변경되 넘어간다.
+			매개변수로 설정되어 있는 Member 클래스가 넘어갈 때 member로 변경되서 넘어감
+			
+		7.  @ModelAttribute 어노테이션으로 폼 객체의 속성명을 직접 지정할 수 있다.
+		[요청과 처리]
+		요청: formtag/registerForm07
+		처리: String registerForm07(@ModelAttribute("user") Member member)
+			modelAttribute 속성값이 폼 객체의 속성명과 일치하지 않으면 에러가 발생한다.
+		
+		8.  @ModelAttribute 어노테이션으로 폼 객체의 속성명을 직접 지정할 수 있다.
+		[요청과 처리]
+		요청: formtag/registerForm08
+		처리: String registerForm08(@ModelAttribute("user") Member member)
+		
+		9. 폼 객체의 프로퍼티에 값을 지정하여 모델을 통하여 전달한다.
+		[요청과 처리]
+		요청: formtag/registerForm09
+		처리: String registerForm09(Model model)
+			model.addAttribute("member", member)
+			
+		결과) registerForm01 ~ 09 까지의 action으로 설정된  결과 페이지 처리부
+		[요청과 처리]
+		요청: formtag/registerForm01 ~ registerForm09 (결과를 요청하기 위한 폼페이지)
+		      formtag/register
+		처리: String register(Member member, Model model)
+			model.addAttribute("member", member)
+			
+		** form:form 태그를 사용하면서 핵심은 modelAttribute에 설정한 자바빈즈 객체의 속성명과
+			서버 컨트롤러 메소드에서 매개변수로 전달받은 자바빈즈 클래스를 해당하는 페이지로 전송하는 방법,
+			또는 Model 이라는 전달자를 통해서 modelAttribute에 설정한 자바빈즈 객에츼 속성명과 동일한
+			속성명으로 전달해줘야 한다는 점이다
+			
+			해당 속성명을 달리해서 주고자 할때는 Model 리라는 전달자를 통해서 키 자리에 값을 원하는 속성명으로 주되
+			JSP단에서 form:form 태그의 modelAtribute 속성값 또한 같은 속성명으로 설정해 주어야함을
+			잊지말도록 하자
+			
+	3. 폼 항목의 공통 속성
 	
+		HTML 홈 항목을 출력하기 위한 태그라이브러리에는 몇 가지 공통 속성이 있습니다.
+		
+		path
+		- 폼 항목에 바인딩 되는 폼 객체의 프로퍼티를 지정합니다.
+		
+		disable
+		- 폼 항목을 비활성화할지 여부를 지정합니다.
+		- (기본값은 false입니다)			
+			
+		readonly
+		- 폼 항목을 읽지 전용으로 만들지 여부를 지정합니다.
+		- (기본값은 false입니다)			
+			
+		*** disable & readonly 속성
+		
+		우리가 input type="text"의 값을 disable 하거나 readonly 한 후에 form의 submot요소를 이용해서
+		해당 action에 설정한 결로로 데이터를 보냈을 때,  disable한 후 데이터를 보내는 것과 , readonly한 후에 데이터를 보내는데에는
+		차이가 있습니다. disable 한 후 데이터를 보냈을 때 데이터가 넘어가지 않고 readonly 했을 때는 데이터가 넘어갑니다.
+		그렇지만 disable이라는 속성을 이용하여 해당 input 요소들을 가용해야만 한다면, input type="hidden"이라는 타입을 이용해서
+		disable된 input 요소의 값과 name을 명시해서 action에 설정된 해당 경로로 데이터가 정상적으로 잘 넘어갈 수 있도록 조치합니다.
+		
+	4. 텍스트 필드 요소
 	
+		HTML 텍스트 필드를 출력하려면 <form:input> 요소를 사용한다.
+		
+		Controller : JSPFormTextFieldTagController
+		JSP : form/textfield/~~~~
+		
+		1. 모델에 기본생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다
+		[요청과 처리]
+		요청: formtag/textfield/registerForm01
+		처리: String registerForm01(Model model) 
+			model.addAttribute("member", new Member());
+				
+		
+		2.  폼 객체를 생성하여 값을 설정한 후에 전달한다.
+		[요청과 처리]
+		요청: formtag/textfield/registerForm02
+		처리: String registerForm02(Model model) 
+			model.addAttribute("member", new Member());
+			
+	5. 패스워드 필드 요소
 	
+		HTML 패스워드 필드를 출력하려면 <form:password> 요소를 사용한다.
+		
+		Controller : JSPFormPasswordTagController
+		JSP : form/password/~~~~
+		
+		1. 모델에 기본생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다
+		[요청과 처리]
+		요청: formtag/password/registerForm01
+		처리: String registerForm01(Model model) 
+			model.addAttribute("member", new Member());
+			
+			*** 값을 설정해서 뷰에 전달하더라도 패스워드 필드에 반영되지않는다.	
+		
+		2.  폼 객체를 생성하여 값을 설정한 후에 전달한다.
+		[요청과 처리]
+		요청: formtag/password/registerForm02
+		처리: String registerForm02(Model model) 
+			model.addAttribute("member", member);
+			
+			*** 값을 설정해서 뷰에 전달하더라도 패스워드 필드에 반영되지않는다.	
+		
+			
+	6. 텍스트 영역 요소
 	
+		HTML 텍스트 영역을 필드를 출력하려면 <form:textarea> 요소를 사용한다.
+		
+		Controller : JSPFormTextareaController
+		JSP : form/textarea/~~~~
+		
+		1. 모델에 기본생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다
+		[요청과 처리]
+		요청: formtag/textarea/registerForm01
+		처리: String registerForm01(Model model) 
+			model.addAttribute("member", new Member());
+		
+		2.  폼 객체를 생성하여 값을 설정한 후에 전달한다.
+		[요청과 처리]
+		요청: formtag/textarea/registerForm02
+		처리: String registerForm02(Model model) 
+			model.addAttribute("member", member);
+			
+	7. 여러개의 체크 박스 요소
 	
+		HTML 여러 개의 체크박스를 출력하려면 <form:checkboxes> 요소를 사용한다.
+		
+		Controller : JSPFormCheckboxesTagController
+		JSP : form/checkboxes/~~~~
+		
+		1. 모델에 Map 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/checkboxes/registerForm01
+		처리: String registerForm01(Model model) 
+			model.addAttribute("hobbyMap", hobbyMap);
+			model.addAttribute("member", new Member());
+		
+			*** Map으로 데이터를 보내게 되면, JSP단에서 Map에 설정된 키, 값대로만 설정해야 하므로 어느정도 제한이 있다.
+				그래서 CodeValue객체를 만들어서 value, label과 같은 값을 자유롭게 가용할 수 있도록 한다.
+			
+		2.  모델에 List 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/checkboxes/registerForm02
+		처리: String registerForm02(Model model) 
+			model.addAttribute("hobbyCodeList", hobbyCodeList);
+			model.addAttribute("member", new Member());
+			
+			*** List에 한행 한행씩 CodeValue객체를 셋팅해서 넣었다(총 데이터 3개)
+				List안에 CodeValue객체로 들어있는 객체 내 필드들 label, value를 이용해서 내가 만들고자 하는 컴포넌트의 value와 값을 자유롭게
+				수정하고 위치를 바꿔 변경 할 수 있다
+			
+	8. 체크 박스 요소
+	
+		HTML 체크박스를 출력하려면 <form:checkbox> 요소를 사용한다.
+		
+		Controller : JSPFormCheckboxTagController
+		JSP : form/checkbox/~~~~
+		
+		1. 모델에 기본생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/checkbox/registerForm01
+		처리: String registerForm01(Model model)
+			model.addAttribute("member", new Member());
+		
+		2.  객체를 생성하여 값을 설정한 후 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/checkbox/registerForm02
+		처리: String registerForm02(Model model) 
+			model.addAttribute("member", member);
+			
+		3. 결과
+		[요청과 처리]
+		요청: formtag/checkbox/result
+		처리: String registerResult(Member member, Model model)
+			model.addAttribute("member", member);
+		
+	9. 여러개의 라디오 버튼 요소
+	
+		HTML 여러 개의 라디오 버튼을 출력하려면 <form:radiobuttons> 요소를 사용한다.
+		
+		Controller : JSPFormRadioTagController
+		JSP : form/radio/~~~~
+		
+		1. 모델에 Map 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/radio/registerFormRadios01
+		처리: String registerFormRadios01(Model model) 
+			model.addAttribute("genderCodeMap", genderCodeMap);
+			model.addAttribute("member", new Member());
+		
+		2.  모델에 List 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/radio/registerFormRadios02
+		처리: String registerFormRadios02(Model model) 
+			model.addAttribute("genderCodeList", genderCodeList);
+			model.addAttribute("member", new Member());
+			
+		3. 결과
+		[요청과 처리]
+		요청: formtag/radio/result
+		처리: String registerFormRadiosResult(Member member, Model model)
+			model.addAttribute("gender", member.getGender());	
+		
+	10. 라디오 버튼 요소
+	
+		HTML 라디오 버튼을 출력하려면 <form:radiobutton> 요소를 사용한다.
+		
+		Controller : JSPFormRadioTagController
+		JSP : form/radio/~~~~
+		
+		1. 모델에 기본생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/radio/registerFormRadio01
+		처리: String registerFormRadio01(Model model)
+			model.addAttribute("member", new Member())
+		
+		2.  객체를 생성하여 값을 설정한 후 화면에 전달한다. 
+		[요청과 처리]
+		요청: formtag/radio/registerFormRadio02
+		처리: String registerFormRadio02(Model model) 
+			model.addAttribute("member", member);
+			
+		3. 결과
+		[요청과 처리]
+		요청: formtag/radio/result2
+		처리: String registerResult(Member member, Model model)
+			model.addAttribute("member", member);	
+	
+	11. 셀렉트 박스 요소
+	
+		HTML 셀렉트 박스를 버튼을 출력하려면 <form:select> 요소를 사용한다.
+		
+		Controller : JSPFormSelectboxController
+		JSP : form/selectbox/~~~~
+		
+		1. 모델에 Map 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/selectbox/registerFormSelectbox01
+		처리: String registerFormSelectbox01(Model model)
+			model.addAttribute("nationalityCodeMap", nationalityCodeMap);
+			model.addAttribute("member", new Member());
+		
+		2. 모델에 List 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/selectbox/registerFormSelectbox02
+		처리: String registerFormSelectbox02(Model model) 
+			model.addAttribute("nationalityCodeList", nationalityCodeList);
+			model.addAttribute("member", new Member());
+			
+		3. 모델에 Map 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/selectbox/registerFormSelectbox03
+		처리: String registerFormSelectbox03(Model model) 
+			model.addAttribute("carCodeMap", carCodeMap);
+			model.addAttribute("member", new Member());
+			
+		4. 모델에 CodeLabelValue 타입의 요소를 가지는 List 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/selectbox/registerFormSelectbox04
+		처리: String registerFormSelectbox04(Model model) 
+			model.addAttribute("carCodeList", carCodeList);
+			model.addAttribute("member", new Member());
+			
+		5. 모델에 CodeLabelValue 타입의 요소를 가지는 List 타입의 데이터를 생성하여 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/selectbox/registerFormSelectbox05
+		처리: String registerFormSelectbox05(Model model) 
+			model.addAttribute("carCodeList", carCodeList);
+			model.addAttribute("member", new Member());
+			
+		6. 결과
+		[요청과 처리]
+		요청: formtag/radio/result
+		처리: String registerFromSelectboxResult(Member member, Model model)
+			model.addAttribute("nationality",  member.getNationality());
+				
+		7. 결과2
+		[요청과 처리]
+		요청: formtag/radio/result2
+		처리: String registerFormSelectboxResult2(Member member, Model model)
+			model.addAttribute("carList",  carList);
+				
+	12. 숨겨진 필드 요소	
+	
+		HTML 숨겨진 필드를 출력하려면 <form:hidden> 요소를 사용한다.
+		
+		Controller : JSPFormHiddenController
+		JSP : form/hidden/~~~~
+		
+		1. 객체를 생성하여 값을 설정한 후 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/hidden/registerFormHidden01
+		처리: String registerFormHidden01(Model model)
+			model.addAttribute("member", member); // 자바빈즈라서 안해도 넘어는 감!
+		
+		2. 결과
+		[요청과 처리]
+		요청: formtag/hidden/result2
+		처리: String registerFormHiddenResult(Model model)
+			model.addAttribute("member", member); 
+	
+	13. 라벨 요소	
+	
+		HTML 라벨을 출력하려면 <form:label> 요소를 사용한다.
+		
+		Controller : JSPFormLabelTagController.java
+		JSP : form/label/~~~~
+		
+		1. 모델에 기본 생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/label/registerFormLabel01
+		처리: String registerFormLabel01(Model model)
+			model.addAttribute("member", new Member()); 
+		
+		2. 객체를 생성하여 값을 설정한 후 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/label/registerFormLabel02
+		처리: String registerFormLabel02(Model model)
+			model.addAttribute("member", member); 
+		
+		3. 결과
+		[요청과 처리]
+		요청: formtag/label/result
+		처리: String registerFormLabelResult(Member member, Model model)
+			*** 자바빈즈 클래스 객체를 매개변수로 받아서 model전달자없이 보낼수 있기 때문에
+				아래 내용을 꼭 명시하지 않아도 됨
+			model.addAttribute("member", new Member()); 
+	
+	14. 버튼 요소	
+	
+		HTML 버튼을 출력하려면 <form:button> 요소를 사용한다.
+		
+		Controller : JSPFormButtonTagController
+		JSP : form/button/~~~~
+		
+		1. 모델에 기본 생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/button/registerFormLabel01
+		처리: String registerFormButton01(Model model)
+			model.addAttribute("member", member);
+		
+		2. 결과
+		[요청과 처리]
+		요청: formtag/button/result
+		처리: String registerFormLabelResult(Member member, Model model)
+
+	15. 입력값 검증 에러	
+		
+		입력값 검증 에러를 출력하려면 <form:errors> 요소를 사용한다.
+		
+		Controller : JSPFormButtonTagController
+		JSP : form/validation/~~~~
+		
+		1. 모델에 기본 생성자로 생성한 폼 객체를 추가한 후에 화면에 전달한다.
+		[요청과 처리]
+		요청: formtag/validation/registerFormValidation01
+		처리: String registerFormValidation01(Model model) 
+			model.addAttribute("member", member);
+		
+		2. 결과
+		[요청과 처리]
+		요청: formtag/validation/result
+		처리: String registerFormValidationResult(Member member, Model model)
+			model.addAttribute("member", member);
+			
+		*** form:error 만으로는 입력값 검증을 마무리 할 수 없다.
+		*** validation 역할자가 꼭 필요함
+		
+		클라이언트에서 서버로 modelAttribute에서 바인딜 할 객체를 설정하고 아이디, 이름, 이메일 등등의 데이터를 입력 누락 시킨 후
+		서버로 요청했을 때, form:errors에 담길 메세지는 바인딩 되지만, 바인딩 됬다고 출력을 하기위한 validation 역할자가 없기 때문에
+		없는 채로 결과 페이지가 요청된다!	
+		
+┌──────────────────────────
+│	9장. 입력 유효성 검증
+└──────────────────────────
+			
+	1. 입력값 검증
+	
+		스프링 MVC Bean Validation  기능을 이용해 요청 파라미터 값이 바인딩된 도메인 클래스(또는 커맨드 클래스)의 입력값 검증을 한다.
+		
+		환경설정
+		
+			의존관계 정의
+			- 입력 값 검증을 위한 의존 라이브러리를 추가한다.
+			
+			<!-- 입력값을 검증하기 위한 라이브러리 의존 관계 정의 -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>5.4.2.Final</version>
+			</dependency>
+		
+			pom.xml에 추가한다.
+			프로젝트 Maven Update를 진행하여 라이브러리 등록을 업데이트 한다.
+			
+			*** 프로젝트 Maven 업데이트를 하지 않는 경우, 라이브러리 등록이 잘 이뤄지지 않는 경우가 있기 때문에 
+				꼭 하도록 합시다!!!
+				
+			입력값 검증 활성화
+			입력값 검증을 하기 위해서는 메서드 매개변수와 도메인 클래스를 정의 하고 @Validated를 지정한다.
+			입력값 검증 대상의 도메인 클래스 직후에 BindingResult를 정의한다.
+			bindingResult에는 요청 데이터의 바인딩 오류와 입력값 검증 오류 정보가 저장된다.
+			
+				*** @Validated 어노테이션을 지정하여 입력값 검증 기능을 활성화 한다.
+				
+	[1 참고 소스] ------------------------------------------------------------			
+		Controller : ValidationController
+		JSP : validation/*
+	--------------------------------------------------------------------------		
+		
+   2. 입력값 검증 결과
+   
+      입력값 검증 대상의 도메인 클래스 직후에 BindingResult를 정의한다.
+      BindingResult에는 요청 데이터의 바인딩 에러와 입력값 검증 에러 정보가 저장된다.
+      
+      에러 정보 확인을 위한 BindingResult 메서드
+      
+         hasError()
+         - 에러가 발생한 경우 true를 반환한다.
+         
+         hasGlobalErrors()
+         - 객체 레벨의 에러가 발생한 경우 true를 반환한다.
+         
+         hasFieldErrors()
+         - 필드 레벨의 에러가 발생한 경우 true를 반환한다.
+         
+         hasFieldErrors(String)
+         - 인수에 지정한 필드에서 에러가 발생한 경우 true를 반환한다.
+            
+            
+   [ 2. 참고 소스 ] ---------------------------------------------------------------------------------------         
+      
+      Controller : ValidationController
+      JSP : validation/*
+      
+   --------------------------------------------------------------------------------------------------------
+	
+		
+		
+	3. 입력값 검증 규칙
+	  
+	 입력값 검증 규칙은 Bean Validation이 제공하는 제약 어노테이션으로 설정한다.
+	 검사 규칙은 크게 다음 세가지로 분류할 수 있다.
+	  - Bean Validation 표준 제약 어노테이션
+	  - 서드파티에서 구현한 제약 어노테이션
+	  - 직접 구현한 제약 어노테이션
+	  
+	입력값 검증 규칙
+	 @NotNull				: 빈값이 아닌지를 검사
+	 @Null				: null인지를 검사
+	 @NotBlank			: 문자열이 null이 아니고 trim 길이가 0보다 크다는 것을 감시
+	 @NotEnpty			: 문자열이 null이거나 비어있는지 검사
+	 @Size				: 글자 수나 컬렉션의 요소 개수를 검사
+	 	> @Size(max=, min= )
+	 @Max(value=)			: value보다 작거나 같은걸 검사
+	 @Min(value=)			: value보다 크거나 같은걸 검사
+	 @Email				: 이메일 주소 형식인지 검사
+	 @Past				: 과거 날짜인지 검사
+	 @Future				: 미래 날짜인지 검사
+	 @Pattern(regexp=)	: charSequence는 지정된 정규실과 일치해야하고, 정규식은 Java 정규식 규칙 따름
+	 @Positive			: 양수여야함 (0은 에러)
+	 @PositiveOrZero		: 양수 또는 0이여야함
+	 @Length(min=, max=)	: 문자열의 길이가 min과 max사이인지 확인
+	 ...
+	 등등이 있는데 구글링해서 더많은 정보를 얻어 더 좋고 빠르고 더 가독성 있는 소프트웨어를 만들어주시길 바랍니다!
+	 
+	[3. 참고 소스] ------------------------------------------------------------			
+		Controller : ValidationController
+		JSP : validation/*
+	--------------------------------------------------------------------------			
+		
+	4. 중첩된 자바빈즈 입력값 검증
+		
+		중첩된 자바빈즈와 자바빈즈 컬렉션에서 정의한 프로퍼티에 대해 입력값 검증을 할때는 @Valid를 지정한다.
+		
+		중첩된 자바 빈즈 입력값 검증 지정
+			
+			중첩된 자바빈즈 클래스를 정의하고 @Valid를 지정한다.
+			// 중첩된 자바빈즈의 입력값 검증을 지정한다.
+			@Valid
+			private Address address;
+			// 중첩된 자바빈즈의 입력값 검증을 지정한다.
+			@Valid
+			private List<Card> cardList;
+				
+	[4. 참고 소스] ------------------------------------------------------------			
+		Controller : ValidationController
+		JSP : validation/*
+	--------------------------------------------------------------------------	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
