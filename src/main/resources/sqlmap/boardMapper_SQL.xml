@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.hdcd.mapper.BoardMapper">
+	<!-- parameterType 그 해당 경로 진짜 이름  D:\A_TeachingMaterial\08_Framework\02.SPRING2\workspace\DevProject\src\main\webapp\WEB-INF\mybatisAlias\mybatisAlias.xml 변경함-->
+	<insert id="create" parameterType="board">
+		insert into board(
+			board_no, title, content, writer, reg_date
+		)values(
+			seq_board.nextval, #{title}, #{content}, #{writer}, sysdate
+		)
+	</insert>
+	
+	<select id="list" resultType="board">
+		<![CDATA[
+			select
+				board_no as boardNo, title, content, writer, reg_date as regDate
+			from board
+			where board_no > 0
+			order by board_no desc, reg_date desc	
+		]]>
+	</select>
+	
+	<select id="read" parameterType="int" resultType="board">
+			select
+				board_no as boardNo, title, content, writer, reg_date as regDate
+			from board
+			where board_no = #{boardNo}
+	</select>
+	
+	<update id="update" parameterType="board">
+		update board
+		set
+			title = #{title},
+			content = #{content}
+		where board_no = #{boardNo}	
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from board where board_no = #{boardNo}	
+	</delete>
+</mapper>
