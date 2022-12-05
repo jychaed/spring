@@ -1,23 +1,23 @@
-package org.hdcd.controller.board.service;
+package org.hdcd.controller.free.service;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.hdcd.mapper.BoardMapper;
+import org.hdcd.mapper.FreeBoardmapper;
 import org.hdcd.vo.Board;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BoardServiceImpl implements IBoardService {
-
-	@Inject
-	private BoardMapper mapper;	
+public class FreeServiceImpl implements IFreeService {
 	
+	@Inject
+	private FreeBoardmapper mapper;
+
 	@Override
 	public void register(Board board) throws Exception {
 		mapper.create(board);
-
+		
 	}
 
 	@Override
@@ -39,11 +39,5 @@ public class BoardServiceImpl implements IBoardService {
 	public void delete(int boardNo) throws Exception {
 		mapper.delete(boardNo);
 		
-	}
-
-	@Override
-	public List<Board> search(String title) throws Exception {
-		return mapper.search(title);
-	}
-
+	}	
 }

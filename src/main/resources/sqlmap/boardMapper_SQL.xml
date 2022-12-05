@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.hdcd.mapper.BoardMapper">
+	
 	<!-- parameterType 그 해당 경로 진짜 이름  D:\A_TeachingMaterial\08_Framework\02.SPRING2\workspace\DevProject\src\main\webapp\WEB-INF\mybatisAlias\mybatisAlias.xml 변경함-->
-	<insert id="create" parameterType="board">
+	<insert id="create" parameterType="board" useGeneratedKeys="true">
+		<!-- 셀렉트키 해야지만 기본키로 취득이 가능함! -->
+		<selectKey order="BEFORE" keyProperty="boardNo" resultType="int" >
+	 		select seq_board.nextval from dual
+	 	</selectKey>
 		insert into board(
 			board_no, title, content, writer, reg_date
 		)values(
-			seq_board.nextval, #{title}, #{content}, #{writer}, sysdate
+			#{boardNo}, #{title}, #{content}, #{writer}, sysdate
 		)
 	</insert>
 	
 	<select id="list" resultType="board">
 		<![CDATA[
 			select
-				board_no as boardNo, title, content, writer, reg_date as regDate
+				board_no, title, content, writer, reg_date
 			from board
 			where board_no > 0
 			order by board_no desc, reg_date desc	
@@ -22,7 +27,7 @@
 	
 	<select id="read" parameterType="int" resultType="board">
 			select
-				board_no as boardNo, title, content, writer, reg_date as regDate
+				board_no, title, content, writer, reg_date
 			from board
 			where board_no = #{boardNo}
 	</select>
@@ -38,4 +43,30 @@
 	<delete id="delete" parameterType="int">
 		delete from board where board_no = #{boardNo}	
 	</delete>
+	
+	<!-- 20221205 추가 -->
+	<select id="search" parameterType="string" resultType="board">
+		<![CDATA[
+			select
+				board_no, title, content, writer, reg_date
+			from board
+			where board_no > 0	
+		]]>
+		
+		<if test="title != null and title != ''">
+			and title like '%'||#{title}||'%'
+		</if>
+		
+		<![CDATA[
+			order by board_no desc, reg_date desc
+		]]>
+		
+	</select>
+	
+	
+	
+	
+	
+	
+	
 </mapper>

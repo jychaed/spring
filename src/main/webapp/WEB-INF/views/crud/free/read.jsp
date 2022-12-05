@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board Read</title>
+<title>Free Board Read</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
 	$("#btnModify").on("click", function() {
-		$("#delForm").attr("action", "/crud/board/modify");
+		$("#delForm").attr("action", "/crud/free/modify");
 		$("#delForm").attr("method", "get");
 		$("#delForm").submit();
 	});
@@ -21,17 +21,17 @@ $(function() {
 		}else{
 			$("#delForm").reset();
 		}
-	});
+	})
 	
 	$("#btnList").on("click", function() {
-		location.href = "/crud/list";
+		location.href = "/crud/free/list";
 	});
 	
-});
-
+	
+})
 </script>
 <body>
-	<h2>Read</h2>
+	<h2> Free Board Read</h2>
 	<table>
 		<tr>
 			<td>제목</td>
@@ -50,7 +50,7 @@ $(function() {
 			<td>${board.regDate }</td>
 		</tr>
 	</table>
-	<form action="/crud/board/remove" id="delForm" method="post">
+	<form action="/crud/free/remove" id="delForm" method="post" >
 		<input type="hidden" name="boardNo" value="${board.boardNo }">
 	</form>
 	<div>

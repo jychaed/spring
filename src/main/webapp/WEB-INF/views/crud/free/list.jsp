@@ -2,21 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>    
-<%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form" %>    
+<%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form" %>      
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board List</title>
+<title>Free Board List</title>
 </head>
 <body>
-	<h2>List</h2>
-	<a href="/crud/board/register">등록</a>
-	<!-- 동적 SQL에서 추가 ::: 검색하기 -->
-	<form action="/crud/board/search" method="post">
-		<input type="text" name="title" value="${board.title }"/>
-		<input type="submit" value="검색"/>
-	</form>
+	<h2>Free Board List</h2>
+	<a href="/crud/free/register">등록</a>
 	<table border="1">
 		<tr>
 			<td align="center" width="80">번호</td>
@@ -34,7 +29,7 @@
 				<c:forEach items="${list }" var="board">
 					<tr>
 						<td align="center">${board.boardNo }</td>
-						<td align="left"><a href="/crud/board/read?boardNo=${board.boardNo }">${board.title }</a></td>
+						<td align="left"><a href="/crud/free/read?boardNo=${board.boardNo }">${board.title }</a></td>
 						<td align="right">${board.writer }</td>
 						<td align="center"><fmt:formatDate value="${board.regDate }" pattern="yyyy-MM-dd hh:mm"/></td>
 					</tr>

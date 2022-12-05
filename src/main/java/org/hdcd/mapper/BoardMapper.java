@@ -15,6 +15,8 @@ public interface BoardMapper {
 	public void update(Board board) throws Exception;
 
 	public void delete(int boardNo) throws Exception;
+
+	public List<Board> search(String title) throws Exception;
 	
 	
 	
