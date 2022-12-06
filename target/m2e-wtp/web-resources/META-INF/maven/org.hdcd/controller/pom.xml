@@ -8,9 +8,9 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<!-- 자바 버전을 1.6에서 1.8로 변경합니다 -->
+		<!-- 자바 버전을 1.6에서 1.8로 변경합니다. -->
 		<java-version>1.8</java-version>
-		<!-- 스프링 버전을 3.1.1.RELEASE 에서 5.2.5.RELEASE로 변경합니다. -->
+		<!-- 스프링 버전을 3.1.1.RELEASE에서 5.2.5.RELEASE로 변경합니다. -->
 		<org.springframework-version>5.2.5.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
@@ -85,6 +85,8 @@
 			<scope>runtime</scope>
 		</dependency>
 
+
+
 		<!-- @Inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -92,8 +94,10 @@
 			<version>1</version>
 		</dependency>
 				
+				
+				
 		<!-- Servlet -->
-		<!-- 서블릿 버전을 3.1로 변경 -->
+		<!-- 서블릿 버전을 2.5에서 3.1로 변경 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -112,6 +116,8 @@
 			<version>1.2</version>
 		</dependency>
 		
+		
+		
 		<!-- json 데이터 바인딩을 위한 의존 라이브러리 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -119,21 +125,37 @@
 			<version>2.9.5</version>
 		</dependency>
 		
-		<!-- xml 데이터 바인딩을 위한 의존 라이브러리 -->
+		
+		<!-- 
+			xml 데이터 바인딩을 위한 의존 라이브러리
+			
+			*ajaxHome > 7. Accept 매핑에서...
+			 1. 이게 있다면?
+			   - getXmlBtn은 이게 잇어야 클릭했을 때 alert가 뜨고 입력값이 들어옴.
+			   - 하지만 getBtn은 alert는 뜨지만 값이 들어오지 않고 'location : null'이 뜸.
+			 2. 주석 처리 된다면?
+			    - 
+			
+		 -->
 <!-- 		<dependency> -->
 <!-- 			<groupId>com.fasterxml.jackson.dataformat</groupId> -->
 <!-- 			<artifactId>jackson-dataformat-xml</artifactId> -->
 <!-- 			<version>2.9.5</version> -->
 <!-- 		</dependency> -->
-		
-		<!-- 파일업로드를 처리하기 위한 라이브러리 의존 관계 정의 20221125 추가-->
+
+
+
+
+		<!-- 파일 업로드를 위한 라이브러리 설정 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-		
 
+
+
+		
 		<!-- 파일을 처리하기 위한 라이브러리 의존 관계 정의 -->
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -141,6 +163,16 @@
 			<version>2.6</version>
 		</dependency>
 		
+		
+		
+		<!-- JSTL(JSP Standard Tag Library)를 사용할 수 있도록 도와주는 라이브러리 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
 		<!-- 입력값을 검증하기 위한 라이브러리 의존 관계 정의 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -148,55 +180,101 @@
 			<version>5.4.2.Final</version>
 		</dependency>
 		
-		<!-- Database 라이브러리 시작 -->
-		<!-- XML로 쿼리를 작성하게 해주는 라이브러리 -->
+		
+		
+		<!-- Database 라이브러리 시작 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  -->
+		
+		
+		<!-- XML로 쿼리를 작성하게 해 주는 라이브러리 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>3.5.10</version>
 		</dependency>
 		
-		<!-- 스프링과 mybatis를 연동하게 해주는 라이브러리 -->
+		<!-- 스프링과 mybatis를 연동하게 해 주는 라이브러리 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>2.0.4</version>
 		</dependency>
-				
-		<!-- 스프링에서 JDBC(Java Database Connectivity) -->
+		
+		<!-- 스프링에서 JDBC(Java Database Connectivity) 연동 -->
+		<!-- 위에서 설정된 버전대로 설정됨. -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+		
 		<!-- 
-			dbcp : database connection pool => 커넥션 객체를 미리 만들어 놓고 쓰고/반납 
-			최근에는 hikaricp를 사용하는 경우도 있음
+			dbcp : database connection pool => 커넥션 객체를 미리 만들어 놓고, 쓰고, 반납함. 
+				   (최근에는 hikaricp를 사용하는 경우도 있음.)
 		-->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>
 			<version>2.7.0</version>
 		</dependency>
-				
-		<!-- 로깅을 위한 라이브러리, 쿼리를 console이나 파일 로그로 볼 수 있음 -->
+		
+		<!-- 로깅을 위한 라이브러리, 쿼리를 console이나 파일 로그로 볼 수 있음. -->
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
 			<version>1.16</version>
 		</dependency>
-				
+		
 		<!-- ojdbc6 : oracle java database connectivity 드라이버 -->
-		<!-- ojdbc6 인데 나중에 ojdbc8을 써도 무방합니다. -->
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc6</artifactId>
 			<version>11.2.0.4</version>
 		</dependency>
-				
 		
-		<!-- Database 라이브러리 끝 -->
+		<!-- Database 라이브러리 끝 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		
+		<!-- Tiles 의존 관계 등록 시작 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-servlet</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>3.0.8</version>
+		</dependency>
+		
+		<!-- Tiles 의존 관계 등록 끝 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+		
+		
+		<!-- 
+			apache commons
+			 : 데이터 StringUtils lang3를 이용할 때 사용
+		 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.6</version>
+		</dependency>
+		
+		
+		
 	
 		<!-- Test -->
 		<dependency>

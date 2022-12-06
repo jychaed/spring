@@ -37,9 +37,8 @@ $(function() {
 <body>
 	<h3>Free Board Register Form</h3>
 	<form:form modelAttribute="free" action="/crud/free/register" method="post">
-		<c:if test="${status eq 'u' }">
-			<input type="hidden" name="boardNo" value="${board.boardNo }" />
-		</c:if>
+		 
+		 
 		<table>
 			<tr>
 				<td>제목</td>

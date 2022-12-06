@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
 
-	<!-- 
-		[마이바티스] 스프링에서 '_'를 사용한 컬럼명을 사용시 (ex) BOOK테이블의 BOOK_ID
-					카멜 케이스로 읽어줌(bookId)
-	 -->
-
+	<!-- [ 마이바티스 ] 
+			스프링에서 '_'를 사용한 컬럼명을 사용시 카멜 케이스로 읽어줌.(bookId) 
+			
+				e.g. BOOK 테이블의 BOOK_ID 
+	-->
 	<settings>
-		<setting name="mapUnderscoreToCamelCase" value="true"/> 
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 
-	<!-- 자주 사용하는 타입의 별칭 적용 -->
+
+	<!-- 자주 사용되는 타입의 별칭을 설정함. -->
+	<!-- type : VO의 qualified Name -->
 	<typeAliases>
 		<typeAlias type="org.hdcd.vo.Board" alias="board"/>
 		<typeAlias type="org.hdcd.vo.MemberVO" alias="memberVO"/>
 		<typeAlias type="org.hdcd.vo.MemberAuth" alias="memberAuth"/>
+		<typeAlias type="org.hdcd.vo.NoticeVO" alias="noticeVO"/>
+		<typeAlias type="org.hdcd.vo.PaginationInfoVO" alias="paginationInfoVO"/>
 	</typeAliases>
 </configuration>

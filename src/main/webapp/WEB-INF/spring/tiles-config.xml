@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+
+<!-- Tiles 설정 -->
+<tiles-definitions>
+
+<!-- 
+	공통부가 다를 땐 다른 만큼 여러 개가 생길 수 있답.
+ -->
+	
+	<!-- mainTemplate 설정 : header, mainTemplate, footer (==>공통부) -->
+	<definition name="mainTemplate" template="/WEB-INF/views/mainTemplate.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp"/>
+	</definition>
+	
+	
+	<!-- definition : notice/*로 오는 걸 definition이 잡아서 {}.jsp의 형태로 들어감. -->
+	<!-- extends : 위의 definition의 content는 여기라고 알려줌. -->
+	<definition name="notice/*" extends="mainTemplate">
+		<put-attribute name="content" value="/WEB-INF/views/noticeboard/{1}.jsp"/>
+	</definition>
+
+</tiles-definitions>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
