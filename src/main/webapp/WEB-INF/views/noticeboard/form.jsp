@@ -68,6 +68,12 @@
 
 <script>
 $(function() {
+	// 외부의 CKEDITOR 쓰기위함
+	CKEDITOR.replace('boContent', {
+		filebrowserUploadUrl: '${pageContext.request.contextPath}/imageUpload.do'
+	});
+	
+	
 	var formBtn = $("#formBtn");
 	
 	formBtn.on("click", function() {

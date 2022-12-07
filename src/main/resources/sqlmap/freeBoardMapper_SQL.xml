@@ -34,6 +34,7 @@
 		update board
 		set
 			title = #{title},
+			writer = #{writer},
 			content = #{content}
 		where board_no = #{boardNo}		
 	</update>

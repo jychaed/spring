@@ -4,6 +4,16 @@
 <!-- mapper니까 namespace에도 해당 mapper의 qualifed Name을 넣어야지. -->
 <mapper namespace="org.hdcd.mapper.INoticeMapper">
 	
+	<!-- 검색 기능 추가시 사용한다 -->
+	<sql id="noticeSearch">
+		<if test="searchType != null and searchType == 'title'">
+			and (bo_title like '%'||#{searchWord}||'%')
+		</if>
+		<if test="searchType != null and searchType == 'writer'">
+			and (bo_writer like '%'||#{searchWord}||'%')
+		</if>
+	</sql>
+	
 	<insert id="insertNotice" parameterType="noticeVO">
 		insert into notice(
 			bo_no, bo_title, bo_content, bo_writer, bo_date
@@ -12,10 +22,11 @@
 		)
 	</insert>
 	
+	<!-- 리스트 페이지 시작 검색조건 추가 시작 -->
 	<select id="selectNoticeCount" parameterType="paginationInfoVO" resultType="int">
 		select count(bo_no) from notice
 		where 1=1
-		
+		<include refid="noticeSearch"/>
 	</select>
 	
 	<!-- 중간에 숫자가 비어있는 경우가 있으니 순서대로 값을 가져오는데 문제가 발생하기해서 rnum을 부여! -->
@@ -29,6 +40,7 @@
 					to_date(bo_date, 'yy-mm-dd hh24:mi:ss') bo_date, bo_hit
 				from notice
 				where 1=1
+				<include refid="noticeSearch"/>
 				order by bo_no desc	
 			) a
 		) b
@@ -36,6 +48,7 @@
 			where b.rnum >= #{startRow} and b.rnum <= #{endRow}
 		]]>
 	</select>
+	<!-- 리스트 페이지 시작 검색조건 추가 종료 -->
 	
 	<update id="incrementHit" parameterType="int">
 		update notice

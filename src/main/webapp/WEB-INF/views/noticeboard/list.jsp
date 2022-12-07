@@ -24,12 +24,12 @@
 					<div class="card-header">
 						<div class="card-tools">
 							<form class="input-group input-group-sm" id="searchForm" style="width: 440px;">
-								<input type="hidden" name="page" id="page"/> <!-- 얘로 요청한 곳으로 고고! -->
-								<select class="form-control">
-									<option>제목</option>
-									<option>작성자</option>
-								</select> <input type="text" name="table_search"
-									class="form-control float-right" placeholder="Search">
+								<input type="hidden" name="page" id="page" value=""/> <!-- 얘로 요청한 곳으로 고고! -->
+								<select class="form-control" name="searchType" > <!-- 20221207 검색 -->
+									<option value="title" <c:if test="${searchType == 'title' }"><c:out value="selected"/> </c:if>>제목</option>
+									<option value="writer" <c:if test="${searchType == 'writer' }"><c:out value="selected"/> </c:if>>작성자</option>
+								</select> 
+								<input type="text" name="searchWord" value="${searchWord }" class="form-control float-right" placeholder="Search">
 								<div class="input-group-append">
 									<button type="submit" class="btn btn-default">
 										<i class="fas fa-search"></i>검색

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hdcd.controller.noticeboard.service.INoticeService;
 import org.hdcd.controller.noticeboard.service.NoticeServiceImpl;
 import org.hdcd.vo.NoticeVO;
@@ -31,6 +32,17 @@ public class NoticeRetrieveController {
 		ModelAndView mav = new ModelAndView();
 
 		PaginationInfoVO<NoticeVO> pagingVO = new PaginationInfoVO<NoticeVO>();
+		
+		if(StringUtils.isNotBlank(searchWord)) { // 이부분 해당되면 타고 아니면 넘어가겠죠?
+			if("title".equals(searchType)) {
+				pagingVO.setSearchType("title");	// 제목으로 검색
+			}else {
+				pagingVO.setSearchType("writer");	// 작성자료 검색
+			}
+			pagingVO.setSearchWord(searchWord);
+			mav.addObject("searchType", searchType);
+			mav.addObject("searchWord", searchWord);
+		}
 
 		pagingVO.setCurrentPage(currentPage);
 		int totalRecord = noticeService.selectNoticeCount(pagingVO); // 전체 게시물 수
