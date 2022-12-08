@@ -43,6 +43,20 @@
    
    <context:component-scan base-package="org.hdcd.controller" />
    
+   <!-- 20221208 파일관련 추가 -->
+   <!-- 서블릿 표준용 MultipartResolver를 스프링 Bean으로 정의 -->
+   <beans:bean id="multipartResolver" 
+   		class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+   </beans:bean>
+   
+   <beans:bean id="uploadPath" class="java.lang.String">
+   	<beans:constructor-arg value="C:\\upload"></beans:constructor-arg>
+   </beans:bean>
+   
+   
+   
+   
+   
    
    
 </beans:beans>

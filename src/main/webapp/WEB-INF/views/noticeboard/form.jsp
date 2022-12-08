@@ -28,7 +28,7 @@
 			<div class="card card-primary">
 				<form:form action="/notice/insert.do" method="post" id="noticeForm" modelAttribute="noticeVO">
 					<c:if test="${status eq 'u' }">
-						<input type="hidden" name="boNo" value="${notice.boNo }"/>
+						<input type="hidden" name="boNo" value="${notice.boNo }"/> <!-- NoticeModifyController 에서 notice로 명명했음! -->
 					</c:if>
 					<div class="card-header">
 						<h3 class="card-title">공지사항 ${name }</h3>
@@ -36,8 +36,8 @@
 					</div>
 					<div class="card-body">
 						<div class="form-group">
-							<label for="inputName">제목을 입력해주세요</label> <input type="text"
-								id="boTitle" name="boTitle" value="${notice.boTitle }" class="form-control" placeholder="제목을 입력해주세요">
+							<label for="inputName">제목을 입력해주세요</label> 
+								<input type="text" id="boTitle" name="boTitle" value="${notice.boTitle }" class="form-control" placeholder="제목을 입력해주세요">
 						</div>
 						<div class="form-group">
 							<label for="inputDescription">내용을 입력해주세요</label>
@@ -46,15 +46,15 @@
 						<div class="form-group">
 	
 							<div class="custom-file">
-								<label for="inputDescription">파일 선택</label> <input type="file"
-									class="custom-file-input" id="customFile"> <label
-									class="custom-file-label" for="customFile">파일을 선택해주세요</label>
+								<label for="inputDescription">파일 선택</label> 
+								<input type="file" class="custom-file-input" id="customFile"> 
+								<label class="custom-file-label" for="customFile">파일을 선택해주세요</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-12">
 								<a href="/notice/list.do">
-									<input type="button" value="목록" class="btn btn-success float-right"> 
+								<input type="button" value="목록" class="btn btn-success float-right"> 
 								</a>
 								<input type="button" value=${name } id="formBtn" class="btn btn-primary float-right">
 							</div>
