@@ -23,5 +23,7 @@
 		<typeAlias type="org.hdcd.vo.PaginationInfoVO" alias="paginationInfoVO"/>
 		<typeAlias type="org.hdcd.vo.Item" alias="item"/>
 		<typeAlias type="org.hdcd.vo.Item2" alias="item2"/>
+		<typeAlias type="org.hdcd.vo.Item3" alias="item3"/>
+		<typeAlias type="org.hdcd.vo.item3Attach" alias="item3Attach"/>
 	</typeAliases>
 </configuration>

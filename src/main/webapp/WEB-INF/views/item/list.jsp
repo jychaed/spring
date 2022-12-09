@@ -10,7 +10,7 @@
 <body>
 	<h2>List</h2>
 	<a href="/item/register">상품등록</a>
-	</hr>
+	<hr/>
 	<table border="1">
 		<tr>
 			<th align="center" width="80">상품ID</th>
