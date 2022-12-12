@@ -2,6 +2,7 @@ package org.hdcd.mapper;
 
 import java.util.List;
 
+import org.hdcd.vo.NoticeFileVO;
 import org.hdcd.vo.NoticeVO;
 import org.hdcd.vo.PaginationInfoVO;
 
@@ -20,4 +21,20 @@ public interface INoticeMapper {
 	public int updateNotice(NoticeVO noticeVO);
 
 	public int deleteNotice(int boNo);
+
+	public void insertNoticeFile(NoticeFileVO noticeFileVO);
+
+	public NoticeFileVO selectNoticeFile(Integer integer);
+
+	public void deleteNoticeFile(Integer integer);
+
+	public void deleteNoticeFileByBoNo(int boNo);
+
+	public NoticeFileVO noticeDownload(int fileNo);
+
+	public void incrementNoticeDowncount(int fileNo);
+
+
+
+
 }

@@ -20,6 +20,7 @@
 		<typeAlias type="org.hdcd.vo.MemberVO" alias="memberVO"/>
 		<typeAlias type="org.hdcd.vo.MemberAuth" alias="memberAuth"/>
 		<typeAlias type="org.hdcd.vo.NoticeVO" alias="noticeVO"/>
+		<typeAlias type="org.hdcd.vo.NoticeFileVO" alias="noticeFileVO"/> <!-- 20221212 추가 -->
 		<typeAlias type="org.hdcd.vo.PaginationInfoVO" alias="paginationInfoVO"/>
 		<typeAlias type="org.hdcd.vo.Item" alias="item"/>
 		<typeAlias type="org.hdcd.vo.Item2" alias="item2"/>

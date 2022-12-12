@@ -1,5 +1,11 @@
 package org.hdcd.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 public class NoticeVO {
 	private int rnum;
 	private int boNo;
@@ -8,6 +14,12 @@ public class NoticeVO {
 	private String boWriter;
 	private String boDate;
 	private int boHit;
+	
+	// 20221212 추가 
+	private Integer[] delNoticeNo;
+	private MultipartFile[] boFile;
+	private List<NoticeFileVO> noticeFileList;
+	
 	
 	public int getRnum() {
 		return rnum;
@@ -50,6 +62,37 @@ public class NoticeVO {
 	}
 	public void setBoHit(int boHit) {
 		this.boHit = boHit;
+	}
+	
+	// 20221212
+	public Integer[] getDelNoticeNo() {
+		return delNoticeNo;
+	}
+	public void setDelNoticeNo(Integer[] delNoticeNo) {
+		this.delNoticeNo = delNoticeNo;
+	}
+	public MultipartFile[] getBoFile() {
+		return boFile;
+	}
+	public void setBoFile(MultipartFile[] boFile) {
+		this.boFile = boFile;
+		if(boFile != null) {
+			List<NoticeFileVO> noticeList = new ArrayList<NoticeFileVO>();
+			for (MultipartFile items : boFile) {
+				if (StringUtils.isBlank(items.getOriginalFilename())) {
+					continue;
+				}
+				NoticeFileVO noticeFileVO = new NoticeFileVO(items);
+				noticeList.add(noticeFileVO);
+			}
+			this.noticeFileList = noticeList;
+		}
+	}
+	public List<NoticeFileVO> getNoticeFileList() {
+		return noticeFileList;
+	}
+	public void setNoticeFileList(List<NoticeFileVO> noticeFileList) {
+		this.noticeFileList = noticeFileList;
 	}
 	
 	

@@ -1,6 +1,7 @@
 package org.hdcd.controller.noticeboard.web;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.hdcd.ServiceResult;
 import org.hdcd.controller.noticeboard.service.INoticeService;
@@ -26,9 +27,9 @@ public class NoticeModifyController {
 	}
 	
 	@RequestMapping(value = "/update.do", method = RequestMethod.POST)
-	public String noticeUpdate(NoticeVO noticeVO, ModelMap model) {
+	public String noticeUpdate(HttpServletRequest req, NoticeVO noticeVO, ModelMap model) {
 		String goPage="";
-		ServiceResult result = noticeService.updateNotice(noticeVO);
+		ServiceResult result = noticeService.updateNotice(req, noticeVO);
 		
 		if(result.equals(ServiceResult.OK)) {
 			goPage = "redirect:/notice/detail.do?boNo=" + noticeVO.getBoNo();
@@ -42,9 +43,9 @@ public class NoticeModifyController {
 	}
 	
 	@RequestMapping(value = "/delete.do", method = RequestMethod.POST)
-	public String noticeDelete(int boNo, ModelMap model) {
+	public String noticeDelete(HttpServletRequest req, int boNo, ModelMap model) {
 		String goPage="";
-		ServiceResult result = noticeService.deleteNotice(boNo);
+		ServiceResult result = noticeService.deleteNotice(req, boNo);
 		
 		if(result.equals(ServiceResult.OK)) {
 			goPage = "redirect:/notice/list.do";

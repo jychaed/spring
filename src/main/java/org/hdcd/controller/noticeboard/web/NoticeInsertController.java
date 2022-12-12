@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hdcd.ServiceResult;
@@ -26,9 +27,8 @@ public class NoticeInsertController {
 	@Inject
 	private INoticeService noticeService;
 	
-	
 	@RequestMapping(value = "/insert.do", method = RequestMethod.POST)
-	public String noticeInsert(NoticeVO noticeVO, ModelMap model) {	// Model이나 ModelMap이나 똑같음.
+	public String noticeInsert(NoticeVO noticeVO, ModelMap model, HttpServletRequest req) {	// Model이나 ModelMap이나 똑같음.
 		String goPage = "";
 		Map<String, String> errors = new HashMap<String, String>();
 		
@@ -46,7 +46,7 @@ public class NoticeInsertController {
 			goPage = "notice/form";
 		}else { // 에러 없음! 정상!!!
 			noticeVO.setBoWriter("a001");	// 현재 회원 정보가 없으므로 더미데이터 하나 넣어 놓음.
-			ServiceResult result = noticeService.insertNotice(noticeVO);
+			ServiceResult result = noticeService.insertNotice(req, noticeVO);
 			if(result.equals(ServiceResult.OK)) {
 				goPage = "redirect:/notice/list.do";
 			}else {
